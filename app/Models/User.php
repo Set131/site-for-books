@@ -18,12 +18,7 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
-        'email',
-        'password',
-        'phone',
-        'avatar',
-        'created_at',
+        'name', 'email', 'password', 'phone', 'avatar', 'created_at', 'role'
     ];
 
     /**
@@ -93,5 +88,20 @@ class User extends Authenticatable
     public function hasPendingRequestFrom($userId)
     {
         return $this->pendingFriendRequests()->where('user_id', $userId)->exists();
+    }
+
+    public function isAdmin()
+    {
+        return $this->role === 'admin';
+    }
+
+    public function isModerator()
+    {
+        return $this->role === 'moderator' || $this->role === 'admin';
+    }
+
+    public function isUser()
+    {
+        return $this->role === 'user';
     }
 }

@@ -59,6 +59,17 @@ export default function DefaultLayout() {
     });
   }
 
+  const isAdminOrModerator = currentUser?.role === 'admin' || currentUser?.role === 'moderator';
+
+  // Створюємо окремий масив для десктопу та мобільного меню
+  const desktopNavigation = [...navigation];
+  if (isAdminOrModerator) {
+    desktopNavigation.push({ name: 'Адмін-панель', to: '/admin/contacts' });
+  }
+
+  // Для мобільного меню - окремий масив (без адмін-панелі в сітці, вона буде окремо)
+  const mobileNavigation = [...navigation];
+
   return (
     <>
       <div className="min-h-full">
@@ -77,7 +88,7 @@ export default function DefaultLayout() {
                 </div>
                 <div className="hidden md:block">
                   <div className="ml-10 flex items-baseline space-x-4">
-                    {navigation.map((item) => (
+                    {desktopNavigation.map((item) => (
                       <NavLink
                         key={item.name}
                         to={item.to}
@@ -144,8 +155,9 @@ export default function DefaultLayout() {
           </div>
           
           <DisclosurePanel className="md:hidden">
+            {/* Звичайна сітка 2x2 для навігації (без адмін-панелі) */}
             <div className="grid grid-cols-2 gap-2 px-2 pt-2 pb-3 sm:px-3">
-              {navigation.map((item) => (
+              {mobileNavigation.map((item) => (
                 <NavLink
                   key={item.name}
                   to={item.to}
@@ -158,6 +170,20 @@ export default function DefaultLayout() {
                 </NavLink>
               ))}
             </div>
+            {/* Адмін-панель окремим блоком на всю ширину */}
+            {isAdminOrModerator && (
+              <div className="px-2 pb-3">
+                <NavLink
+                  to="/admin/contacts"
+                  className={({isActive}) => classNames(
+                    isActive ? 'bg-[#0c3200]' : 'hover:text-[#ffc400] hover:bg-gray-800',
+                    'rounded-md px-3 py-2 text-sm font-medium text-white transition-all duration-400 text-center block'
+                  )}
+                >
+                  Адмін-панель
+                </NavLink>
+              </div>
+            )}
           </DisclosurePanel>
         </Disclosure>
         <Outlet />

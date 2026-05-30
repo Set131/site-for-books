@@ -19,7 +19,8 @@ class UserController extends Controller
             'name' => $user->name,
             'email' => $user->email,
             'phone' => $user->phone,
-            'avatar_url' => $user->avatar_url,  // 👈 ДОДАТИ
+            'avatar_url' => $user->avatar_url,
+            'role' => $user->role,
             'created_at' => $user->created_at->format('d.m.Y'),
         ]);
     }
@@ -116,5 +117,39 @@ class UserController extends Controller
             });
         
         return response()->json($authors);
+    }
+
+    public function getAllUsers()
+    {
+        $user = auth()->user();
+        if (!$user->isAdmin()) {
+            return response()->json(['error' => 'Доступ заборонено'], 403);
+        }
+        
+        $users = User::select('id', 'name', 'email', 'role')->get();
+        return response()->json($users);
+    }
+
+    public function updateUserRole(Request $request, $id)
+    {
+        $user = auth()->user();
+        if (!$user->isAdmin()) {
+            return response()->json(['error' => 'Доступ заборонено'], 403);
+        }
+        
+        $request->validate([
+            'role' => 'required|in:user,moderator,admin'
+        ]);
+        
+        $targetUser = User::findOrFail($id);
+        
+        // Не можна змінювати роль супер-адміна (якщо він єдиний)
+        if ($targetUser->role === 'admin' && $targetUser->id === $user->id) {
+            return response()->json(['error' => 'Не можна змінити свою роль'], 422);
+        }
+        
+        $targetUser->update(['role' => $request->role]);
+        
+        return response()->json(['success' => true]);
     }
 }

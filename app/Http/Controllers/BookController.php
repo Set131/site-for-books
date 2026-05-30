@@ -21,6 +21,7 @@ class BookController extends Controller
         $filter = $request->query('filter');
         $tags = $request->query('tags');
         $ageLimit = $request->query('age_limit');
+        $userId = $request->query('user_id');
         
         $query = Book::query();
         
@@ -40,6 +41,10 @@ class BookController extends Controller
         // Фільтрація за віковим обмеженням
         if ($ageLimit && $ageLimit !== 'all') {
             $query->where('age_limit', '<=', $ageLimit);
+        }
+
+        if ($userId) {
+            $query->where('user_id', $userId);
         }
 
         if ($filter === 'new') {

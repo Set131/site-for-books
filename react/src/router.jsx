@@ -15,6 +15,7 @@ import BookView from "./views/BookView.jsx";
 import BookPublicView from "./views/BookPublicView.jsx";
 import ChapterView from "./views/ChapterView.jsx";
 import Friends from "./views/Friends.jsx";
+import AdminContacts from "./views/AdminContacts";
 
 const router = createBrowserRouter([
     {
@@ -72,6 +73,10 @@ const router = createBrowserRouter([
             {
                 path: "/friends/:id",
                 element: <Friends />
+            },
+            {
+            path: "/admin/contacts",
+            element: <AdminContacts />
             }
         ]
     },

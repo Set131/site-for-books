@@ -11,6 +11,7 @@ use App\Http\Controllers\HistoryController;
 use App\Http\Controllers\SavedBookController;
 use App\Http\Controllers\CommentController; 
 use App\Http\Controllers\FriendController;
+use App\Http\Controllers\ContactController;
 
 /* 
 |--------------------------------------------------------------------------
@@ -31,12 +32,16 @@ Route::get('/latest-chapters', [ChapterController::class, 'latestChapters']);
 
 Route::get('/books/{book}/comments', [CommentController::class, 'index']);
 
+Route::post('/contact', [ContactController::class, 'store']);
+
 Route::middleware('auth:sanctum')->group(function(){
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::get('/me', [AuthController::class, 'me']);
     Route::get('/profile/{id}', [UserController::class, 'show']);
     Route::put('/profile/{id}', [UserController::class, 'updateProfile']);
     Route::get('/top-authors', [UserController::class, 'getTopAuthors']);
+    Route::get('/admin/users', [UserController::class, 'getAllUsers']);
+    Route::put('/admin/users/{id}/role', [UserController::class, 'updateUserRole']);
     
     Route::apiResource('book', BookController::class);
 
@@ -68,4 +73,10 @@ Route::middleware('auth:sanctum')->group(function(){
     Route::post('/friends/accept/{friendId}', [FriendController::class, 'acceptRequest']);
     Route::delete('/friends/{friendId}', [FriendController::class, 'removeFriend']);
     Route::get('/friends/status/{userId}', [FriendController::class, 'checkStatus']);
+
+    Route::get('/admin/contacts', [ContactController::class, 'index']);
+    Route::get('/admin/contacts/{id}', [ContactController::class, 'show']);
+    Route::post('/admin/contacts/{id}/reply', [ContactController::class, 'reply']);
+    Route::delete('/admin/contacts/{id}', [ContactController::class, 'destroy']);
+    Route::get('/user-notifications', [ContactController::class, 'userNotifications']);
 });

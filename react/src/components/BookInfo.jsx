@@ -1,4 +1,3 @@
-// components/BookInfo.jsx
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axiosClient from "../axios";
@@ -139,10 +138,14 @@ export default function BookInfo({ book, isAuthor, onDeleteBookClick, renderRati
         </button>
 
         <div className="mt-4 space-y-2">
-          <div className="bg-black/50 rounded-lg p-3">
+          {/* Блок автора - тепер клікабельний */}
+          <Link 
+            to={`/profile/${book.user_id}`}
+            className="bg-black/50 rounded-lg p-3 block hover:bg-black/70 transition cursor-pointer"
+          >
             <p className="text-gray-400 text-sm">Автор</p>
             <p className="text-white font-medium">{book.creator_name || "Невідомий"}</p>
-          </div>
+          </Link>
           
           <div className="bg-black/50 rounded-lg p-3">
             <p className="text-gray-400 text-sm">Рік створення</p>

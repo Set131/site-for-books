@@ -1,4 +1,3 @@
-import searchIcon from '../files_photo/search_icon.png';
 
 export default function PageComponent({ title, buttons = '', search = null, children }) {
   return (

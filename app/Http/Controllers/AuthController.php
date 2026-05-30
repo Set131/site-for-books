@@ -29,6 +29,7 @@ class AuthController extends Controller
                 'email' => $user->email,
                 'phone' => $user->phone,
                 'avatar_url' => $user->avatar_url,
+        'role' => $user->role,
                 'created_at' => $user->created_at,
             ],
             'token' => $token
@@ -56,6 +57,7 @@ class AuthController extends Controller
                 'email' => $user->email,
                 'phone' => $user->phone,
                 'avatar_url' => $user->avatar_url,
+                'role' => $user->role,
                 'created_at' => $user->created_at,
             ],
             'token' => $token
@@ -84,6 +86,7 @@ class AuthController extends Controller
             'email' => $user->email,
             'phone' => $user->phone,
             'avatar_url' => $user->avatar_url,
+            'role' => $user->role,
             'created_at' => $user->created_at,
         ]);
     }
