@@ -4,6 +4,7 @@ import { useStateContext } from '../contexts/ContextProvider';
 import axiosClient from "../axios";
 import Bottom from "./Bottom";
 import WindEffect from "../components/WindEffect";
+import { Link } from "react-router-dom";
 
 export default function AdminContacts() {
   const { currentUser, showToast } = useStateContext();
@@ -354,7 +355,7 @@ export default function AdminContacts() {
                       users.map((user) => (
                         <tr key={user.id} className="border-b border-gray-800 hover:bg-[#252525] transition">
                           <td className="px-4 py-3 text-white">{user.id}</td>
-                          <td className="px-4 py-3 text-white">{user.name}</td>
+                          <td className="px-4 py-3 text-white"><Link to={`/profile/${user.id}`}>{user.name}</Link></td>
                           <td className="px-4 py-3 text-gray-400">{user.email}</td>
                           <td className="px-4 py-3">{getRoleBadge(user.role)}</td>
                           <td className="px-4 py-3">

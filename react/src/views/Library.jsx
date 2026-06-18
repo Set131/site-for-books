@@ -86,7 +86,7 @@ export default function Library() {
               </p>
             </div>
           ) : (
-            <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6">
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
               {savedBooks.map((item) => (
                 <div key={item.id} className="bg-[#1a1a1a] rounded-lg overflow-hidden hover:scale-105 transition-transform duration-300 border border-gray-800 hover:border-[#ffc400]">
                   <Link to={`/book/public/${item.book.slug}`}>
@@ -97,7 +97,6 @@ export default function Library() {
                         className="absolute top-0 left-0 w-full h-full object-cover"
                       />
                       
-                      {/* Кнопка видалення на фото (верхній правий кут) */}
                       <button
                         onClick={(e) => removeFromLibrary(item.book_id, e)}
                         className="absolute top-2 right-2 z-20 bg-black/70 hover:bg-red-600 backdrop-blur-sm rounded-full p-2 transition-all duration-200 group"
@@ -127,7 +126,7 @@ export default function Library() {
                         </div>
                       )}
                       <div className="absolute bottom-2 right-2 z-10">
-                        <div className="bg-black/70 backdrop-blur-sm px-2 py-1 rounded-lg">
+                        <div className="bg-black/70 backdrop-blur-sm px-2 py-1 rounded-lg font-bold">
                           {renderRating(item.book.rating)}
                         </div>
                       </div>

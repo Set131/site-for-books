@@ -119,14 +119,14 @@ export default function OwnBooks() {
                           className="absolute top-0 left-0 w-full h-full object-cover"
                         />
                         {book.age_limit > 0 && (
-                          <div className="absolute top-2 left-2 z-10">
-                            <span className="bg-red-600 text-white px-2 py-1 rounded text-xs font-bold">
+                          <div className="absolute bottom-2 left-2 z-10">
+                            <span className="bg-black text-red-700 px-2 py-1 rounded text-xs font-bold">
                               {book.age_limit}+
                             </span>
                           </div>
                         )}
                         <div className="absolute bottom-2 right-2 z-10">
-                          <div className="bg-black/70 backdrop-blur-sm px-2 py-1 rounded-lg">
+                          <div className="bg-black/70 backdrop-blur-sm px-2 py-1 rounded-lg font-bold">
                             {renderRating(book.rating)}
                           </div>
                         </div>

@@ -27,16 +27,6 @@ export default function ChapterView() {
     .then(({ data }) => {
       setChapter(data);
       setLoading(false);
-      
-      // НОВИЙ ЗАПИС В ІСТОРІЮ
-      /*if (currentUser) {
-        axiosClient.post('/history', {
-          book_id: data.book_id,
-          chapter_id: data.id
-        }).catch(err => {
-          console.error("Помилка запису історії:", err);
-        });
-      }*/
     })
     .catch((err) => {
       console.error("Помилка завантаження:", err);
@@ -45,7 +35,6 @@ export default function ChapterView() {
     });
 }, [bookSlug, chapterNumber, currentUser]);
 
-  // Функція для скачування глави
   const downloadChapter = () => {
     if (!chapter || !book) return;
     

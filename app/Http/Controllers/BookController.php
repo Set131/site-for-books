@@ -40,7 +40,7 @@ class BookController extends Controller
 
         // Фільтрація за віковим обмеженням
         if ($ageLimit && $ageLimit !== 'all') {
-            $query->where('age_limit', '<=', $ageLimit);
+            $query->where('age_limit', '=', $ageLimit);
         }
 
         if ($userId) {

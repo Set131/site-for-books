@@ -95,6 +95,9 @@ export default function BookInfo({ book, isAuthor, onDeleteBookClick, renderRati
     }
   };
 
+  // Перевіряємо чи може користувач редагувати/видаляти (автор АБО модератор/адмін)
+  const canEditOrDelete = isAuthor || (currentUser && (currentUser.role === 'admin' || currentUser.role === 'moderator'));
+
   return (
     <>
       <div className="lg:w-[25%] w-full lg:pr-4">
@@ -158,7 +161,8 @@ export default function BookInfo({ book, isAuthor, onDeleteBookClick, renderRati
           </div>
         </div>
 
-        {isAuthor && (
+        {/* Кнопки редагування/видалення - тепер і для модераторів/адмінів */}
+        {canEditOrDelete && (
           <div className="mt-4">
             <Link
               to={`/books/${book.id}`}

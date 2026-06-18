@@ -94,15 +94,15 @@ export default function Main() {
     <>
       <WindEffect />
       <PageComponent title="Main">
-        {/* Популярні книги - горизонтальний скрол */}
+        {/* Популярні книги - горизонтальний скрол без полоси прокрутки */}
         <div className="sm:px-4 px-2">
           <h2 className="text-[#ffc400] text-xl font-bold sm:ml-4 ml-2 mb-4">Популярні книги</h2>
           
           {loadingBooks ? (
             <div className="text-white text-center py-10">Завантаження книг...</div>
           ) : (
-            <div className="overflow-x-auto scrollbar-thin scrollbar-track-gray-800 scrollbar-thumb-[#ffc400]">
-              <div className="flex gap-4 min-w-max sm:py-4 sm:px-4 py-2 px-2">
+            <div className="overflow-x-auto scrollbar-none sm:py-4 sm:px-4 py-2 px-2">
+              <div className="flex gap-4 min-w-max">
                 {books.map((book) => (
                   <Link
                     key={book.id}
@@ -140,7 +140,7 @@ export default function Main() {
           )}
         </div>
 
-        {/* Топ авторів - залишили як було */}
+        {/* Топ авторів - горизонтальний скрол без полоси */}
         <div className="sm:px-8 px-4">
           <h2 className="text-[#ffc400] text-xl font-bold mb-4">Топ авторів</h2>
           
@@ -151,7 +151,7 @@ export default function Main() {
               Ще немає авторів
             </div>
           ) : (
-            <div className="overflow-x-auto scrollbar-thin scrollbar-track-gray-800 scrollbar-thumb-[#ffc400] sm:p-2 p-0">
+            <div className="overflow-x-auto scrollbar-none sm:p-2 p-0">
               <div className="flex gap-4 min-w-max">
                 {topAuthors.map((author) => (
                   <Link

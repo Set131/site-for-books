@@ -1,5 +1,6 @@
 // components/ChaptersList.jsx
 import { Link } from "react-router-dom";
+import { useStateContext } from "../contexts/ContextProvider";
 
 export default function ChaptersList({ 
   chapters, 
@@ -9,6 +10,11 @@ export default function ChaptersList({
   onEditChapter, 
   onDeleteChapter 
 }) {
+  const { currentUser } = useStateContext();
+  
+  // Перевіряємо чи може користувач редагувати/видаляти (автор АБО модератор/адмін)
+  const canEditOrDelete = isAuthor || (currentUser && (currentUser.role === 'admin' || currentUser.role === 'moderator'));
+
   if (loadingChapters) {
     return <div className="text-center py-10">Завантаження розділів...</div>;
   }
@@ -35,7 +41,8 @@ export default function ChaptersList({
             <span className="text-[#ffc400] sm:font-medium font-bold mr-3">Розділ {chapter.chapter_number}</span>
             <span className="text-white">{chapter.title || `Розділ ${chapter.chapter_number}`}</span>
           </Link>
-          {isAuthor && (
+          {/* Кнопки редагування/видалення - тепер і для модераторів/адмінів */}
+          {canEditOrDelete && (
             <div className="flex gap-2 justify-between">
               <button
                 onClick={() => onEditChapter(chapter)}
