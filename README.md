@@ -1,27 +1,33 @@
-<h1>Site for books</h1>
 <table>
   <tr>
-    <!-- объединённая ячейка с фото на два ряда -->
-    <td rowspan="3" valign="middle">
-      <img width="300" src="react/src/files_photo/logo.png" alt=".">
+    <td rowspan="2" width="30%">
+      <img width="300" src="https://github.com/Set131/site-for-books/blob/main/react/src/files_photo/logo.png" alt=".">
     </td>
-     <td valign="middle">
-      <h1><a href="https://trello.com/invite/b/67d02215fc326d06028c0cae/ATTI660e65f90650e372f0b2deaf76bd07be647C113F/mall-portal-games" target="_blank" rel="noopener noreferrer">📌 Trello</h1>
-    </td>
-  </tr>
-  <tr>
-    <td valign="middle">
-      <h1><a href="https://www.figma.com/design/c2i9nLfxzrPEMpZ2dONjin/Untitled?node-id=0-1&p=f&t=nGn09MGXfZrGnqEH-0" target="_blank" rel="noopener noreferrer">🧩 Figma</a></h1>
+    <td>
+      <h1>Site for books</h1>
     </td>
   </tr>
   <tr>
-    <td valign="middle">
-      <h1><a href="https://web.telegram.org/a/#-1002302474845" target="_blank" rel="noopener noreferrer">💬 Telegram</h1>
+    <td>
+      Сайт для публікації та читання книг онлайн. Україномовна платформа, де автори можуть створювати книги та додавати розділи, а читачі – читати, оцінювати, коментувати, додавати в бібліотеку та стежити за оновленнями.
+
+Технології: React, Laravel, Tailwind CSS, MySQL.
+
+Основні можливості: реєстрація, створення книг із розділами (Markdown), бібліотека, сповіщення про нові розділи, коментарі, оцінки, друзі, адмін-панель для модерації.
     </td>
   </tr>
 </table>
 
----
+<img src="https://github.com/Set131/site-for-books/blob/main/public/photos/%D0%A1%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA%20%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%B0%202026-06-17%20152942.png" width="100%">
+<img src="https://github.com/Set131/site-for-books/blob/main/public/photos/%D0%A1%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA%20%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%B0%202026-06-17%20153152.png" width="100%">
+<img src="https://github.com/Set131/site-for-books/blob/main/public/photos/%D0%A1%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA%20%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%B0%202026-06-17%20153221.png" width="100%">
+
+<div style="display: flex; gap: 20px; flex-wrap: wrap;">
+  <img src="https://github.com/Set131/site-for-books/blob/main/public/photos/%D0%A1%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA%20%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%B0%202026-06-17%20153622.png" width="200">
+  <img src="https://github.com/Set131/site-for-books/blob/main/public/photos/%D0%A1%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA%20%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%B0%202026-06-17%20153715.png" width="200">
+  <img src="https://github.com/Set131/site-for-books/blob/main/public/photos/%D0%A1%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA%20%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%B0%202026-06-17%20153758.png" width="200">
+  <img src="https://github.com/Set131/site-for-books/blob/main/public/photos/%D0%A1%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA%20%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%B0%202026-06-17%20153836.png" width="200">
+</div>
 
 ## ⚙️ Технології
 
