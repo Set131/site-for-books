@@ -12,7 +12,7 @@ use App\Http\Controllers\SavedBookController;
 use App\Http\Controllers\CommentController; 
 use App\Http\Controllers\FriendController;
 use App\Http\Controllers\ContactController;
-
+use App\Http\Controllers\StatisticsController;
 /* 
 |--------------------------------------------------------------------------
 | API Routes
@@ -42,7 +42,10 @@ Route::middleware('auth:sanctum')->group(function(){
     Route::get('/top-authors', [UserController::class, 'getTopAuthors']);
     Route::get('/admin/users', [UserController::class, 'getAllUsers']);
     Route::put('/admin/users/{id}/role', [UserController::class, 'updateUserRole']);
-    
+    Route::get('/admin/statistics', [StatisticsController::class, 'getStatistics'])
+        ->middleware('admin');
+    Route::get('/admin/users-by-type', [StatisticsController::class, 'getUsersByType']);
+
     Route::apiResource('book', BookController::class);
 
     Route::get('/books/{book}/chapters', [ChapterController::class, 'index']);
