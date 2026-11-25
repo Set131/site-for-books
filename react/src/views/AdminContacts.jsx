@@ -20,7 +20,7 @@ import {
 } from 'chart.js';
 import { Line, Bar, Pie } from 'react-chartjs-2';
 
-// Реєстрація компонентів Chart.js
+// Registration of Chart.js components
 ChartJS.register(
   CategoryScale,
   LinearScale,
@@ -49,13 +49,13 @@ export default function AdminContacts() {
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [userToDelete, setUserToDelete] = useState(null);
   
-  // Стани для статистики
+  // States for statistics
   const [statsPeriod, setStatsPeriod] = useState('week');
   const [chaptersStats, setChaptersStats] = useState({ labels: [], data: [] });
   const [usersStats, setUsersStats] = useState({ labels: [], data: [] });
   const [authorsStats, setAuthorsStats] = useState({ labels: [], data: [], total: 0 });
 
-  // Стани для списку користувачів
+  // States for user list
   const [showUsersModal, setShowUsersModal] = useState(false);
   const [usersList, setUsersList] = useState([]);
   const [usersListTitle, setUsersListTitle] = useState('');
@@ -82,8 +82,8 @@ export default function AdminContacts() {
       });
       setContacts(data);
     } catch (error) {
-      console.error("Помилка:", error);
-      if (showToast) showToast("Не вдалося завантажити повідомлення", "error");
+      console.error("Error:", error);
+      if (showToast) showToast("Failed to load messages", "error");
     } finally {
       setLoading(false);
     }
@@ -95,8 +95,8 @@ export default function AdminContacts() {
       const { data } = await axiosClient.get('/admin/users');
       setUsers(data);
     } catch (error) {
-      console.error("Помилка:", error);
-      if (showToast) showToast("Не вдалося завантажити користувачів", "error");
+      console.error("Error:", error);
+      if (showToast) showToast("Failed to load users", "error");
     } finally {
       setLoadingUsers(false);
     }
@@ -113,14 +113,14 @@ export default function AdminContacts() {
       setUsersStats(data.users || { labels: [], data: [] });
       setAuthorsStats(data.authors || { labels: [], data: [], total: 0 });
     } catch (error) {
-      console.error("Помилка:", error);
-      if (showToast) showToast("Не вдалося завантажити статистику", "error");
+      console.error("Error:", error);
+      if (showToast) showToast("Failed to load statistics", "error");
     } finally {
       setLoadingStats(false);
     }
   };
 
-  // Функція для завантаження користувачів за типом
+  // Function to load users by type
   const loadUsersByType = async (type, label) => {
     setLoadingUsersList(true);
     setShowUsersModal(true);
@@ -132,8 +132,8 @@ export default function AdminContacts() {
       });
       setUsersList(data);
     } catch (error) {
-      console.error("Помилка:", error);
-      if (showToast) showToast("Не вдалося завантажити користувачів", "error");
+      console.error("Error:", error);
+      if (showToast) showToast("Failed to load users", "error");
       setUsersList([]);
     } finally {
       setLoadingUsersList(false);
@@ -144,11 +144,11 @@ export default function AdminContacts() {
     const newRole = currentRole === 'moderator' ? 'user' : 'moderator';
     try {
       await axiosClient.put(`/admin/users/${userId}/role`, { role: newRole });
-      if (showToast) showToast(`Роль змінено`, "success");
+      if (showToast) showToast(`Role changed`, "success");
       loadUsers();
     } catch (error) {
-      console.error("Помилка:", error);
-      if (showToast) showToast("Не вдалося змінити роль", "error");
+      console.error("Error:", error);
+      if (showToast) showToast("Failed to change role", "error");
     }
   };
 
@@ -157,18 +157,18 @@ export default function AdminContacts() {
     
     try {
       await axiosClient.delete(`/admin/users/${userToDelete.id}`);
-      if (showToast) showToast(`Користувача ${userToDelete.name} видалено`, "success");
+      if (showToast) showToast(`User ${userToDelete.name} deleted`, "success");
       setShowDeleteModal(false);
       setUserToDelete(null);
       loadUsers();
-      // Оновлюємо список у модальному вікні
+      // Update the list in the modal window
       if (showUsersModal) {
-        const type = usersListTitle.includes('з книгами') ? 'with_books' : 'without_books';
+        const type = usersListTitle.includes('with books') ? 'with_books' : 'without_books';
         loadUsersByType(type, usersListTitle);
       }
     } catch (error) {
-      console.error("Помилка:", error);
-      if (showToast) showToast("Не вдалося видалити користувача", "error");
+      console.error("Error:", error);
+      if (showToast) showToast("Failed to delete user", "error");
     }
   };
 
@@ -188,13 +188,13 @@ export default function AdminContacts() {
       setSelectedContact(data);
       setReplyText("");
     } catch (error) {
-      console.error("Помилка:", error);
+      console.error("Error:", error);
     }
   };
 
   const sendReply = async () => {
     if (!replyText.trim()) {
-      if (showToast) showToast("Введіть текст відповіді", "error");
+      if (showToast) showToast("Please enter a reply", "error");
       return;
     }
     
@@ -203,45 +203,45 @@ export default function AdminContacts() {
       await axiosClient.post(`/admin/contacts/${selectedContact.id}/reply`, {
         reply: replyText
       });
-      if (showToast) showToast("Відповідь надіслано", "success");
+      if (showToast) showToast("Reply sent", "success");
       setSelectedContact(null);
       loadContacts();
     } catch (error) {
-      console.error("Помилка:", error);
-      if (showToast) showToast("Не вдалося надіслати відповідь", "error");
+      console.error("Error:", error);
+      if (showToast) showToast("Failed to send reply", "error");
     } finally {
       setReplying(false);
     }
   };
 
   const deleteContact = async (id) => {
-    if (!window.confirm("Ви впевнені, що хочете видалити це повідомлення?")) return;
+    if (!window.confirm("Are you sure you want to delete this message?")) return;
     
     try {
       await axiosClient.delete(`/admin/contacts/${id}`);
-      if (showToast) showToast("Повідомлення видалено", "success");
+      if (showToast) showToast("Message deleted", "success");
       if (selectedContact?.id === id) setSelectedContact(null);
       loadContacts();
     } catch (error) {
-      console.error("Помилка:", error);
-      if (showToast) showToast("Не вдалося видалити повідомлення", "error");
+      console.error("Error:", error);
+      if (showToast) showToast("Failed to delete message", "error");
     }
   };
 
   const getStatusBadge = (status) => {
     switch(status) {
-      case 'new': return <span className="bg-red-600 text-white px-2 py-0.5 rounded text-xs">Нове</span>;
-      case 'read': return <span className="bg-blue-600 text-white px-2 py-0.5 rounded text-xs">Прочитане</span>;
-      case 'replied': return <span className="bg-green-600 text-white px-2 py-0.5 rounded text-xs">Відповіли</span>;
+      case 'new': return <span className="bg-red-600 text-white px-2 py-0.5 rounded text-xs">New</span>;
+      case 'read': return <span className="bg-blue-600 text-white px-2 py-0.5 rounded text-xs">Read</span>;
+      case 'replied': return <span className="bg-green-600 text-white px-2 py-0.5 rounded text-xs">Replied</span>;
       default: return null;
     }
   };
 
   const getRoleBadge = (role) => {
     switch(role) {
-      case 'admin': return <span className="bg-red-600 text-white px-2 py-0.5 rounded text-xs">Адмін</span>;
-      case 'moderator': return <span className="bg-blue-600 text-white px-2 py-0.5 rounded text-xs">Модератор</span>;
-      default: return <span className="bg-gray-600 text-white px-2 py-0.5 rounded text-xs">Користувач</span>;
+      case 'admin': return <span className="bg-red-600 text-white px-2 py-0.5 rounded text-xs">Admin</span>;
+      case 'moderator': return <span className="bg-blue-600 text-white px-2 py-0.5 rounded text-xs">Moderator</span>;
+      default: return <span className="bg-gray-600 text-white px-2 py-0.5 rounded text-xs">User</span>;
     }
   };
 
@@ -249,8 +249,8 @@ export default function AdminContacts() {
     return (
       <>
         <WindEffect />
-        <PageComponent title="Адмін-панель" buttons="">
-          <div className="text-center py-20 text-white">Доступ заборонено</div>
+        <PageComponent title="Admin Panel" buttons="">
+          <div className="text-center py-20 text-white">Access denied</div>
           <Bottom />
         </PageComponent>
       </>
@@ -259,7 +259,7 @@ export default function AdminContacts() {
 
   const isAdmin = currentUser.role === 'admin';
 
-  // Налаштування для графіків
+  // Chart settings
   const chartOptions = (label, color) => ({
     responsive: true,
     maintainAspectRatio: false,
@@ -292,7 +292,7 @@ export default function AdminContacts() {
     }
   });
 
-  // Налаштування для кругової діаграми
+  // Pie chart settings
   const pieOptions = {
     responsive: true,
     maintainAspectRatio: false,
@@ -323,10 +323,10 @@ export default function AdminContacts() {
         const labels = this.data.labels;
         const label = labels[index];
         
-        if (label === 'Мають книги') {
-          loadUsersByType('with_books', 'Користувачі з книгами');
-        } else if (label === 'Не мають книг') {
-          loadUsersByType('without_books', 'Користувачі без книг');
+        if (label === 'Have books') {
+          loadUsersByType('with_books', 'Users with books');
+        } else if (label === 'No books') {
+          loadUsersByType('without_books', 'Users without books');
         }
       }
     }
@@ -336,7 +336,7 @@ export default function AdminContacts() {
     labels: chaptersStats.labels || [],
     datasets: [
       {
-        label: 'Завантажені розділи',
+        label: 'Uploaded chapters',
         data: chaptersStats.data || [],
         borderColor: '#ffc400',
         backgroundColor: 'rgba(255, 196, 0, 0.2)',
@@ -353,7 +353,7 @@ export default function AdminContacts() {
     labels: usersStats.labels || [],
     datasets: [
       {
-        label: 'Нові акаунти',
+        label: 'New accounts',
         data: usersStats.data || [],
         borderColor: '#4ade80',
         backgroundColor: 'rgba(74, 222, 128, 0.2)',
@@ -366,9 +366,9 @@ export default function AdminContacts() {
     ]
   };
 
-  // Дані для кругової діаграми
+  // Data for pie chart
   const pieChartData = {
-    labels: authorsStats.labels || ['Мають книги', 'Не мають книг'],
+    labels: authorsStats.labels || ['Have books', 'No books'],
     datasets: [
       {
         data: authorsStats.data || [0, 0],
@@ -382,7 +382,7 @@ export default function AdminContacts() {
   return (
     <>
       <WindEffect />
-      <PageComponent title="Адмін-панель" buttons="">
+      <PageComponent title="Admin Panel" buttons="">
         <div className="max-w-7xl mx-auto px-4 py-8">
           
           <div className="flex gap-2 flex-wrap">
@@ -394,7 +394,7 @@ export default function AdminContacts() {
                   : 'bg-[#ffc400] text-black hover:bg-black hover:text-[#ffc400] font-bold'
               }`}
             >
-              Повідомлення
+              Messages
             </button>
             {isAdmin && (
               <button
@@ -405,7 +405,7 @@ export default function AdminContacts() {
                     : 'bg-[#ffc400] text-black hover:bg-black hover:text-[#ffc400] font-bold'
                 }`}
               >
-                Користувачі
+                Users
               </button>
             )}
             {isAdmin && (
@@ -417,7 +417,7 @@ export default function AdminContacts() {
                     : 'bg-[#ffc400] text-black hover:bg-black hover:text-[#ffc400] font-bold'
                 }`}
               >
-                Статистика
+                Statistics
               </button>
             )}
           </div>
@@ -427,34 +427,34 @@ export default function AdminContacts() {
               <div className="bg-black">
                 <div className="p-4 bg-black">
                   <h2 className="text-white font-bold">
-                    {selectedContact ? 'Деталі повідомлення' : 'Виберіть повідомлення'}
+                    {selectedContact ? 'Message details' : 'Select a message'}
                   </h2>
                 </div>
                 <div className="p-4">
                   {selectedContact ? (
                     <>
                       <div className="mb-4">
-                        <p className="text-gray-400 text-sm">Від:</p>
+                        <p className="text-gray-400 text-sm">From:</p>
                         <p className="text-white font-medium">{selectedContact.name}</p>
                         <p className="text-gray-400 text-sm">{selectedContact.email}</p>
                       </div>
                       <div className="mb-4">
-                        <p className="text-gray-400 text-sm">Повідомлення:</p>
+                        <p className="text-gray-400 text-sm">Message:</p>
                         <p className="text-white mt-1 whitespace-pre-wrap">{selectedContact.message}</p>
                       </div>
                       {selectedContact.admin_reply && (
                         <div className="mb-4 p-3 bg-[#0c3200] rounded-lg">
-                          <p className="text-[#ffc400] text-sm mb-1">Ваша відповідь:</p>
+                          <p className="text-[#ffc400] text-sm mb-1">Your reply:</p>
                           <p className="text-white text-sm">{selectedContact.admin_reply}</p>
                         </div>
                       )}
                       <div className="mb-4">
-                        <label className="block text-white text-sm mb-2">Відповідь:</label>
+                        <label className="block text-white text-sm mb-2">Reply:</label>
                         <textarea
                           value={replyText}
                           onChange={(e) => setReplyText(e.target.value)}
                           rows="4"
-                          placeholder="Напишіть відповідь..."
+                          placeholder="Write a reply..."
                           className="w-full p-2 rounded-lg bg-[#2a2a2a] text-white border border-gray-700 focus:border-[#ffc400] outline-none resize-none"
                         />
                       </div>
@@ -466,21 +466,21 @@ export default function AdminContacts() {
                             replying ? 'bg-gray-600' : 'bg-[#ffc400] text-black hover:bg-[#e6b000]'
                           }`}
                         >
-                          {replying ? "Відправлення..." : "Надіслати відповідь"}
+                          {replying ? "Sending..." : "Send reply"}
                         </button>
                         {isAdmin && (
                           <button
                             onClick={() => deleteContact(selectedContact.id)}
                             className="px-4 py-2 rounded-lg bg-red-600 text-white hover:bg-red-700 transition"
                           >
-                            Видалити
+                            Delete
                           </button>
                         )}
                       </div>
                     </>
                   ) : (
                     <div className="text-center py-20 text-gray-400">
-                      Натисніть на повідомлення, щоб переглянути деталі
+                      Click on a message to view details
                     </div>
                   )}
                 </div>
@@ -488,34 +488,34 @@ export default function AdminContacts() {
               <div className="bg-[#1a1a1a] overflow-hidden">
                 <div className="p-4 border-b border-gray-800 bg-black">
                   <div className="flex justify-between items-center">
-                    <h2 className="text-white font-bold">Повідомлення ({contacts.length})</h2>
+                    <h2 className="text-white font-bold">Messages ({contacts.length})</h2>
                     <div className="flex gap-2">
                       <button
                         onClick={() => setFilter("all")}
                         className={`px-3 py-1 rounded text-sm ${filter === 'all' ? 'bg-[#ffc400] text-black' : 'bg-gray-700 text-white'}`}
                       >
-                        Всі
+                        All
                       </button>
                       <button
                         onClick={() => setFilter("new")}
                         className={`px-3 py-1 rounded text-sm ${filter === 'new' ? 'bg-[#ffc400] text-black' : 'bg-gray-700 text-white'}`}
                       >
-                        Нові
+                        New
                       </button>
                       <button
                         onClick={() => setFilter("replied")}
                         className={`px-3 py-1 rounded text-sm ${filter === 'replied' ? 'bg-[#ffc400] text-black' : 'bg-gray-700 text-white'}`}
                       >
-                        Відповіли
+                        Replied
                       </button>
                     </div>
                   </div>
                 </div>
                 <div className="max-h-[600px] overflow-y-auto bg-black">
                   {loading ? (
-                    <div className="text-center py-10 text-white">Завантаження...</div>
+                    <div className="text-center py-10 text-white">Loading...</div>
                   ) : contacts.length === 0 ? (
-                    <div className="text-center py-10 text-gray-400">Немає повідомлень</div>
+                    <div className="text-center py-10 text-gray-400">No messages</div>
                   ) : (
                     contacts.map((contact) => (
                       <div
@@ -534,7 +534,7 @@ export default function AdminContacts() {
                         </div>
                         <p className="text-gray-300 text-sm line-clamp-2">{contact.message}</p>
                         <p className="text-gray-500 text-xs mt-2">
-                          {new Date(contact.created_at).toLocaleDateString('uk-UA')}
+                          {new Date(contact.created_at).toLocaleDateString('en-US')}
                         </p>
                       </div>
                     ))
@@ -547,27 +547,27 @@ export default function AdminContacts() {
           {activeTab === "users" && isAdmin && (
             <div className="bg-[#1a1a1a] overflow-hidden">
               <div className="p-4 bg-black">
-                <h2 className="text-white font-bold">Користувачі ({users.length})</h2>
+                <h2 className="text-white font-bold">Users ({users.length})</h2>
               </div>
               <div className="overflow-x-auto">
                 <table className="w-full">
                   <thead className="bg-gray-800">
                     <tr>
                       <th className="px-4 py-3 text-left text-white">ID</th>
-                      <th className="px-4 py-3 text-left text-white">Ім'я</th>
+                      <th className="px-4 py-3 text-left text-white">Name</th>
                       <th className="px-4 py-3 text-left text-white">Email</th>
-                      <th className="px-4 py-3 text-left text-white">Роль</th>
-                      <th className="px-4 py-3 text-left text-white">Дії</th>
+                      <th className="px-4 py-3 text-left text-white">Role</th>
+                      <th className="px-4 py-3 text-left text-white">Actions</th>
                     </tr>
                   </thead>
                   <tbody>
                     {loadingUsers ? (
                       <tr>
-                        <td colSpan="5" className="text-center py-10 text-white">Завантаження...</td>
+                        <td colSpan="5" className="text-center py-10 text-white">Loading...</td>
                       </tr>
                     ) : users.length === 0 ? (
                       <tr>
-                        <td colSpan="5" className="text-center py-10 text-gray-400">Немає користувачів</td>
+                        <td colSpan="5" className="text-center py-10 text-gray-400">No users</td>
                       </tr>
                     ) : (
                       users.map((user) => (
@@ -583,7 +583,7 @@ export default function AdminContacts() {
                                   onClick={() => toggleUserRole(user.id, user.role)}
                                   className="px-3 py-1 rounded text-sm bg-[#ffc400] text-black hover:bg-[#e6b000] transition font-bold"
                                 >
-                                  Змінити
+                                  Change
                                 </button>
                               )}
                               {user.id !== currentUser.id && (
@@ -591,11 +591,11 @@ export default function AdminContacts() {
                                   onClick={() => openDeleteModal(user)}
                                   className="px-3 py-1 rounded text-sm bg-red-600 text-white hover:bg-red-700 transition font-bold"
                                 >
-                                  Видалити
+                                  Delete
                                 </button>
                               )}
                               {user.role === 'admin' && user.id === currentUser.id && (
-                                <span className="text-gray-500 text-sm">Це ви</span>
+                                <span className="text-gray-500 text-sm">This is you</span>
                               )}
                             </div>
                           </td>
@@ -611,7 +611,7 @@ export default function AdminContacts() {
           {activeTab === "statistics" && isAdmin && (
             <div className="bg-[#1a1a1a] p-6">
               <div className="flex justify-between items-center mb-6">
-                <h2 className="text-white font-bold text-xl">Статистика</h2>
+                <h2 className="text-white font-bold text-xl">Statistics</h2>
                 <div className="flex gap-2">
                   <button
                     onClick={() => setStatsPeriod('week')}
@@ -621,7 +621,7 @@ export default function AdminContacts() {
                         : 'bg-gray-700 text-white hover:bg-gray-600'
                     }`}
                   >
-                    Тиждень
+                    Week
                   </button>
                   <button
                     onClick={() => setStatsPeriod('month')}
@@ -631,7 +631,7 @@ export default function AdminContacts() {
                         : 'bg-gray-700 text-white hover:bg-gray-600'
                     }`}
                   >
-                    Місяць
+                    Month
                   </button>
                   <button
                     onClick={() => setStatsPeriod('year')}
@@ -641,49 +641,49 @@ export default function AdminContacts() {
                         : 'bg-gray-700 text-white hover:bg-gray-600'
                     }`}
                   >
-                    Рік
+                    Year
                   </button>
                 </div>
               </div>
 
               {loadingStats ? (
-                <div className="text-center py-20 text-white">Завантаження статистики...</div>
+                <div className="text-center py-20 text-white">Loading statistics...</div>
               ) : (
                 <>
                   <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                    {/* Графік завантажених розділів */}
+                    {/* Uploaded chapters chart */}
                     <div className="bg-black p-4 rounded-lg">
                       <h3 className="text-white font-bold text-lg mb-4 text-center">
-                        Завантажені розділи
+                        Uploaded chapters
                       </h3>
                       <div className="h-[300px]">
                         <Line 
                           data={chaptersChartData} 
-                          options={chartOptions('Завантажені розділи', '#ffc400')}
+                          options={chartOptions('Uploaded chapters', '#ffc400')}
                         />
                       </div>
                     </div>
 
-                    {/* Графік нових акаунтів */}
+                    {/* New accounts chart */}
                     <div className="bg-black p-4 rounded-lg">
                       <h3 className="text-white font-bold text-lg mb-4 text-center">
-                        Нові акаунти
+                        New accounts
                       </h3>
                       <div className="h-[300px]">
                         <Line 
                           data={usersChartData} 
-                          options={chartOptions('Нові акаунти', '#4ade80')}
+                          options={chartOptions('New accounts', '#4ade80')}
                         />
                       </div>
                     </div>
                   </div>
 
-                  {/* Кругова діаграма - автори */}
+                  {/* Pie chart - authors */}
                   <div className="mt-6 bg-black p-4 rounded-lg">
                     <h3 className="text-white font-bold text-lg mb-4 text-center">
-                      Співвідношення авторів
+                      Author ratio
                       <span className="text-sm font-normal text-gray-400 block">
-                        (Натисніть на сектор або кількість для перегляду списку)
+                        (Click on a sector or number to view the list)
                       </span>
                     </h3>
                     <div className="flex flex-col md:flex-row items-center justify-center gap-8">
@@ -692,15 +692,15 @@ export default function AdminContacts() {
                       </div>
                       <div className="w-full md:w-1/2 text-white">
                         <div className="bg-[#1a1a1a] p-4 rounded-lg">
-                          <p className="text-center text-lg font-bold mb-4">Статистика авторів</p>
+                          <p className="text-center text-lg font-bold mb-4">Author statistics</p>
                           <div className="space-y-3">
                             <div 
                               className="flex justify-between items-center border-b border-gray-700 pb-2 cursor-pointer hover:bg-[#252525] p-2 rounded transition"
-                              onClick={() => loadUsersByType('with_books', 'Автори')}
+                              onClick={() => loadUsersByType('with_books', 'Authors')}
                             >
                               <span className="flex items-center gap-2">
                                 <span className="w-3 h-3 rounded-full bg-green-500"></span>
-                                Автори
+                                Authors
                               </span>
                               <span className="text-green-400 font-bold hover:text-[#ffc400] transition">
                                 {authorsStats.data?.[0] || 0} →
@@ -708,18 +708,18 @@ export default function AdminContacts() {
                             </div>
                             <div 
                               className="flex justify-between items-center border-b border-gray-700 pb-2 cursor-pointer hover:bg-[#252525] p-2 rounded transition"
-                              onClick={() => loadUsersByType('without_books', 'Читачі')}
+                              onClick={() => loadUsersByType('without_books', 'Readers')}
                             >
                               <span className="flex items-center gap-2">
                                 <span className="w-3 h-3 rounded-full bg-red-500"></span>
-                                Читачі
+                                Readers
                               </span>
                               <span className="text-red-400 font-bold hover:text-[#ffc400] transition">
                                 {authorsStats.data?.[1] || 0} →
                               </span>
                             </div>
                             <div className="flex justify-between items-center pt-2">
-                              <span className="font-bold">Всього користувачів</span>
+                              <span className="font-bold">Total users</span>
                               <span className="text-[#ffc400] font-bold">{authorsStats.total || 0}</span>
                             </div>
                           </div>
@@ -735,15 +735,15 @@ export default function AdminContacts() {
         <Bottom />
       </PageComponent>
 
-      {/* Модальне вікно для підтвердження видалення */}
+      {/* Delete confirmation modal window */}
       {showDeleteModal && userToDelete && (
         <div className="fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-4">
           <div className="bg-[#1a1a1a] rounded-2xl max-w-md w-full p-6 relative">
             <h2 className="text-xl font-bold text-[#ffc400] text-center mb-4">
-              Підтвердження видалення
+              Delete confirmation
             </h2>
             <p className="text-white text-center mb-6">
-              Ви справді хочете видалити користувача <br />
+              Are you sure you want to delete user <br />
               <span className="text-[#ffc400] font-bold">{userToDelete.name}</span>?
             </p>
             <div className="flex gap-3">
@@ -751,20 +751,20 @@ export default function AdminContacts() {
                 onClick={deleteUser}
                 className="flex-1 py-2 rounded-lg bg-red-600 text-white font-bold hover:bg-red-700 transition"
               >
-                Так, видалити
+                Yes, delete
               </button>
               <button
                 onClick={closeDeleteModal}
                 className="flex-1 py-2 rounded-lg bg-gray-600 text-white font-bold hover:bg-gray-700 transition"
               >
-                Ні, скасувати
+                No, cancel
               </button>
             </div>
           </div>
         </div>
       )}
 
-      {/* Модальне вікно зі списком користувачів */}
+      {/* User list modal window */}
       {showUsersModal && (
         <div className="fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-4">
           <div className="bg-[#1a1a1a] rounded-2xl max-w-4xl w-full max-h-[80vh] flex flex-col relative">
@@ -781,20 +781,20 @@ export default function AdminContacts() {
             </div>
             <div className="p-6 overflow-y-auto flex-1">
               {loadingUsersList ? (
-                <div className="text-center py-10 text-white">Завантаження...</div>
+                <div className="text-center py-10 text-white">Loading...</div>
               ) : usersList.length === 0 ? (
-                <div className="text-center py-10 text-gray-400">Немає користувачів</div>
+                <div className="text-center py-10 text-gray-400">No users</div>
               ) : (
                 <div className="overflow-x-auto">
                   <table className="w-full">
                     <thead className="bg-gray-800 sticky top-0">
                       <tr>
                         <th className="px-4 py-3 text-left text-white">ID</th>
-                        <th className="px-4 py-3 text-left text-white">Ім'я</th>
+                        <th className="px-4 py-3 text-left text-white">Name</th>
                         <th className="px-4 py-3 text-left text-white">Email</th>
-                        <th className="px-4 py-3 text-left text-white">Роль</th>
-                        <th className="px-4 py-3 text-left text-white">Книг</th>
-                        <th className="px-4 py-3 text-left text-white">Дії</th>
+                        <th className="px-4 py-3 text-left text-white">Role</th>
+                        <th className="px-4 py-3 text-left text-white">Books</th>
+                        <th className="px-4 py-3 text-left text-white">Actions</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -815,13 +815,13 @@ export default function AdminContacts() {
                                 <button
                                   onClick={() => {
                                     toggleUserRole(user.id, user.role);
-                                    // Оновлюємо список
-                                    const type = usersListTitle.includes('з книгами') ? 'with_books' : 'without_books';
+                                    // Update the list
+                                    const type = usersListTitle.includes('with books') ? 'with_books' : 'without_books';
                                     setTimeout(() => loadUsersByType(type, usersListTitle), 500);
                                   }}
                                   className="px-2 py-1 rounded text-xs bg-[#ffc400] text-black hover:bg-[#e6b000] transition font-bold"
                                 >
-                                  Змінити роль
+                                  Change role
                                 </button>
                               )}
                               {user.id !== currentUser.id && (
@@ -832,7 +832,7 @@ export default function AdminContacts() {
                                   }}
                                   className="px-2 py-1 rounded text-xs bg-red-600 text-white hover:bg-red-700 transition font-bold"
                                 >
-                                  Видалити
+                                  Delete
                                 </button>
                               )}
                             </div>

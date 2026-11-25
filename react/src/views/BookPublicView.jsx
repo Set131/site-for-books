@@ -173,7 +173,7 @@ export default function BookPublicView() {
           <div className="text-[#ffc400] justify-center flex font-bold mb-60 flex-col items-center">
             <p className="p-4">Книга успішно видалена!</p>
             <Link to="/catalog" className="p-4 text-black bg-[#ffc400] mt-20 rounded-xl">
-              Повернутись до каталогу
+              Back to catalog
             </Link>
           </div>
           <Bottom />
@@ -186,8 +186,8 @@ export default function BookPublicView() {
     return (
       <>
         <WindEffect />
-        <PageComponent title="Книга" buttons="">
-          <div className="text-center py-10 text-white">Завантаження...</div>
+        <PageComponent title="Book" buttons="">
+          <div className="text-center py-10 text-white">Loading...</div>
           <Bottom />
         </PageComponent>
       </>
@@ -229,13 +229,13 @@ export default function BookPublicView() {
 
             <div className="mt-8">
               <div className="flex justify-between items-center mb-4 border-b border-[#ffc400] pb-2">
-                <h2 className="text-2xl font-bold text-[#ffc400]">Зміст</h2>
+                <h2 className="text-2xl font-bold text-[#ffc400]">Content</h2>
                 {isAuthor && (
                   <button
                     onClick={openAddChapterForm}
                     className="bg-[#ffc400] text-black px-4 py-2 rounded-lg font-medium hover:bg-[#e6b000] transition"
                   >
-                    + Додати розділ
+                    + Add chapter
                   </button>
                 )}
               </div>

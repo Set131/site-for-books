@@ -87,13 +87,13 @@ export default function Comments({ bookId }) {
   };
 
   if (loading) {
-    return <div className="text-center py-10 text-white">Завантаження коментарів...</div>;
+    return <div className="text-center py-10 text-white">Loading...</div>;
   }
 
   return (
     <div className="mt-8">
       <h2 className="text-2xl font-bold text-[#ffc400] mb-4 border-b border-[#ffc400] pb-2">
-        Коментарі ({comments.length})
+        Comments ({comments.length})
       </h2>
 
       <form onSubmit={submitComment} className="mb-6">
@@ -114,7 +114,7 @@ export default function Comments({ bookId }) {
               : "bg-[#ffc400] text-black hover:bg-[#e6b000]"
           }`}
         >
-          {submitting ? "Відправлення..." : "Залишити коментар"}
+          {submitting ? "Відправлення..." : "Send"}
         </button>
       </form>
 

@@ -14,117 +14,117 @@ export default function About() {
 
   const faqs = [
     {
-      question: "Як додати книгу в бібліотеку?",
-      answer: "Перейдіть на сторінку книги, яка вам сподобалася, і натисніть кнопку «Додати в бібліотеку» під фото книги. Книга автоматично збережеться у вашій персональній бібліотеці."
+      question: "How to add a book to the library?",
+      answer: "Go to the page of the book you like and click the 'Add to Library' button under the book photo. The book will be automatically saved to your personal library."
     },
     {
-      question: "Як створити власну книгу?",
-      answer: "Перейдіть у розділ «Мої книги» (доступний у вашому профілі) та натисніть кнопку «+ Додати книгу». Заповніть інформацію про книгу (назва, опис, обкладинка, теги, вікове обмеження). Після створення книги ви зможете додавати розділи."
+      question: "How to create your own book?",
+      answer: "Go to the 'My Books' section (available in your profile) and click the '+ Add Book' button. Fill in the book information (title, description, cover, tags, age restriction). After creating the book, you will be able to add chapters."
     },
     {
-      question: "Як додати розділи до своєї книги?",
-      answer: "Після створення книги перейдіть на її сторінку. В розділі «Зміст» натисніть «+ Додати розділ». Вкажіть номер розділу, назву (необов'язково) та текст у форматі Markdown. Розділи автоматично впорядковуються за номером."
+      question: "How to add chapters to your book?",
+      answer: "After creating the book, go to its page. In the 'Table of Contents' section, click '+ Add Chapter'. Specify the chapter number, title (optional), and text in Markdown format. Chapters are automatically ordered by number."
     },
     {
-      question: "Що таке Markdown і як його використовувати?",
-      answer: "Markdown — це проста мова розмітки для форматування тексту. Ви можете використовувати: # Заголовок, **жирний текст**, *курсив*, [посилання](url), - список, 1. нумерований список, ```код```, > цитата. Текст автоматично конвертується в HTML при збереженні."
+      question: "What is Markdown and how to use it?",
+      answer: "Markdown is a simple markup language for text formatting. You can use: # Heading, **bold text**, *italic*, [link](url), - list, 1. numbered list, ```code```, > quote. The text is automatically converted to HTML when saved."
     },
     {
-      question: "Як оцінити книгу?",
-      answer: "На сторінці книги натисніть кнопку «Оцінити книгу» під фото. Оберіть оцінку від 1 до 10. Ви можете змінити свою оцінку в будь-який момент. Середня оцінка книги розраховується автоматично з усіх оцінок користувачів."
+      question: "How to rate a book?",
+      answer: "On the book page, click the 'Rate Book' button under the photo. Choose a rating from 1 to 10. You can change your rating at any time. The average book rating is automatically calculated from all user ratings."
     },
     {
-      question: "Як додати друга?",
-      answer: "Перейдіть на профіль користувача, якого хочете додати в друзі, та натисніть кнопку «Додати в друзі». Користувач отримає запит. Після підтвердження ви станете друзями."
+      question: "How to add a friend?",
+      answer: "Go to the profile of the user you want to add as a friend and click the 'Add Friend' button. The user will receive a request. After confirmation, you will become friends."
     },
     {
-      question: "Де я можу побачити своїх друзів?",
-      answer: "У вашому профілі натисніть на кнопку «Друзі». Там ви побачите список ваших друзів, а також запити в друзі, які очікують на підтвердження."
+      question: "Where can I see my friends?",
+      answer: "In your profile, click the 'Friends' button. There you will see a list of your friends, as well as pending friend requests awaiting confirmation."
     },
     {
-      question: "Як отримувати сповіщення про нові розділи?",
-      answer: "Додайте книгу в бібліотеку. Коли автор додасть новий розділ до цієї книги, ви отримаєте сповіщення на сторінці «Повідомлення»."
+      question: "How to receive notifications about new chapters?",
+      answer: "Add the book to your library. When the author adds a new chapter to this book, you will receive a notification on the 'Messages' page."
     },
     {
-      question: "Чи можна видалити коментар?",
-      answer: "Так, ви можете видалити лише свої коментарі. Для цього натисніть кнопку «Видалити» поруч із вашим коментарем. Автор книги також може видаляти коментарі під своєю книгою."
+      question: "Can I delete a comment?",
+      answer: "Yes, you can only delete your own comments. To do this, click the 'Delete' button next to your comment. The book author can also delete comments under their book."
     },
     {
-      question: "Як змінити фото профілю?",
-      answer: "Перейдіть у свій профіль, натисніть «Змінити фото» під аватаром, виберіть нове зображення та збережіть. Фото буде автоматично обрізане до квадрата."
+      question: "How to change profile photo?",
+      answer: "Go to your profile, click 'Change Photo' under the avatar, select a new image and save. The photo will be automatically cropped to a square."
     },
     {
-      question: "Як змінити номер телефону?",
-      answer: "У вашому профілі натисніть кнопку «Змінити» поруч із полем телефону. Введіть 9 цифр номера без коду країни (формат: XX XXX XX XX). Після збереження номер відображатиметься у форматі +380 (XX) XXX-XX-XX."
+      question: "How to change phone number?",
+      answer: "In your profile, click the 'Change' button next to the phone field. Enter 9 digits of the number without the country code (format: XX XXX XX XX). After saving, the number will be displayed in the format +380 (XX) XXX-XX-XX."
     }
   ];
 
   return (
     <>
       <WindEffect />
-      <PageComponent title="Про сайт" buttons="">
+      <PageComponent title="About" buttons="">
         <div className="max-w-6xl mx-auto px-4 py-8">
-          {/* Герой-секція */}
+          {/* Hero section */}
           <div className="flex flex-col md:flex-row items-center gap-8 mb-12">
             <div className="md:w-1/2 flex justify-center">
               <img src={logo} alt="Logo" className="w-48 md:w-64 p-2" />
             </div>
             <div className="md:w-1/2 text-white">
-              <h1 className="text-4xl font-bold text-[#ffc400] mb-4 text-center md:text-left">Про сайт</h1>
+              <h1 className="text-4xl font-bold text-[#ffc400] mb-4 text-center md:text-left">About</h1>
               <p className="text-gray-300 leading-relaxed text-center md:text-left">
-                Ласкаво просимо на наш сайт — простір для читачів та авторів книг!
+                Welcome to our website — a space for readers and authors of books!
               </p>
               <p className="text-gray-300 leading-relaxed mt-4 text-center md:text-left">
-                Тут ви можете читати книги онлайн, додавати їх у бібліотеку, 
-                отримувати сповіщення про нові розділи, спілкуватися з іншими 
-                читачами через коментарі та додавати друзів. Автори можуть публікувати 
-                власні книги та розділи, використовуючи зручний Markdown редактор.
+                Here you can read books online, add them to your library, 
+                receive notifications about new chapters, interact with other 
+                readers through comments, and add friends. Authors can publish 
+                their own books and chapters using a convenient Markdown editor.
               </p>
             </div>
           </div>
 
-          {/* Статистика */}
+          {/* Statistics */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12 text-center">
             <div className="bg-[#1a1a1a] rounded-lg p-4 border border-gray-800">
               <div className="text-3xl font-bold text-[#ffc400]">∞</div>
-              <div className="text-white text-sm mt-1">Книг у каталозі</div>
+              <div className="text-white text-sm mt-1">Books in catalog</div>
             </div>
             <div className="bg-[#1a1a1a] rounded-lg p-4 border border-gray-800">
               <div className="text-3xl font-bold text-[#ffc400]">100+</div>
-              <div className="text-white text-sm mt-1">Активних авторів</div>
+              <div className="text-white text-sm mt-1">Active authors</div>
             </div>
             <div className="bg-[#1a1a1a] rounded-lg p-4 border border-gray-800">
               <div className="text-3xl font-bold text-[#ffc400]">1000+</div>
-              <div className="text-white text-sm mt-1">Щоденних читачів</div>
+              <div className="text-white text-sm mt-1">Daily readers</div>
             </div>
             <div className="bg-[#1a1a1a] rounded-lg p-4 border border-gray-800">
               <div className="text-3xl font-bold text-[#ffc400]">24/7</div>
-              <div className="text-white text-sm mt-1">Доступ до книг</div>
+              <div className="text-white text-sm mt-1">Access to books</div>
             </div>
           </div>
 
-          {/* Секція "Як це працює" */}
+          {/* "How it works" section */}
           <div className="mb-12">
-            <h2 className="text-2xl font-bold text-[#ffc400] mb-6 text-center">Як це працює?</h2>
+            <h2 className="text-2xl font-bold text-[#ffc400] mb-6 text-center">How it works?</h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               <div className="bg-[#1a1a1a] rounded-lg p-6 text-center border border-gray-800 hover:border-[#ffc400] transition">
-                <h3 className="text-white font-bold text-lg mb-2">Читайте</h3>
-                <p className="text-gray-400 text-sm">Переглядайте книги та читайте розділи онлайн</p>
+                <h3 className="text-white font-bold text-lg mb-2">Read</h3>
+                <p className="text-gray-400 text-sm">Browse books and read chapters online</p>
               </div>
               <div className="bg-[#1a1a1a] rounded-lg p-6 text-center border border-gray-800 hover:border-[#ffc400] transition">
-                <h3 className="text-white font-bold text-lg mb-2">Пишіть</h3>
-                <p className="text-gray-400 text-sm">Створюйте власні книги та додавайте розділи</p>
+                <h3 className="text-white font-bold text-lg mb-2">Write</h3>
+                <p className="text-gray-400 text-sm">Create your own books and add chapters</p>
               </div>
               <div className="bg-[#1a1a1a] rounded-lg p-6 text-center border border-gray-800 hover:border-[#ffc400] transition">
-                <h3 className="text-white font-bold text-lg mb-2">Спілкуйтесь</h3>
-                <p className="text-gray-400 text-sm">Коментуйте, оцінюйте та додавайте друзів</p>
+                <h3 className="text-white font-bold text-lg mb-2">Connect</h3>
+                <p className="text-gray-400 text-sm">Comment, rate, and add friends</p>
               </div>
             </div>
           </div>
 
           {/* FAQ */}
           <div className="mb-8">
-            <h2 className="text-2xl font-bold text-[#ffc400] mb-6 text-center">Можливі питання</h2>
+            <h2 className="text-2xl font-bold text-[#ffc400] mb-6 text-center">Frequently Asked Questions</h2>
             <div className="space-y-3">
               {faqs.map((faq, index) => (
                 <div key={index} className="bg-[#1a1a1a] rounded-lg border border-gray-800 overflow-hidden">

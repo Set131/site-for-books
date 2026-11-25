@@ -53,7 +53,6 @@ export default function Main() {
       });
   }, []);
 
-  // Завантаження топ авторів
   useEffect(() => {
     axiosClient
       .get("/top-authors")
@@ -94,12 +93,11 @@ export default function Main() {
     <>
       <WindEffect />
       <PageComponent title="Main">
-        {/* Популярні книги - горизонтальний скрол без полоси прокрутки */}
         <div className="sm:px-4 px-2">
-          <h2 className="text-[#ffc400] text-xl font-bold sm:ml-4 ml-2 mb-4">Популярні книги</h2>
+          <h2 className="text-[#ffc400] text-xl font-bold sm:ml-4 ml-2 mb-4">Popular Books</h2>
           
           {loadingBooks ? (
-            <div className="text-white text-center py-10">Завантаження книг...</div>
+            <div className="text-white text-center py-10">Loading...</div>
           ) : (
             <div className="overflow-x-auto scrollbar-none sm:py-4 sm:px-4 py-2 px-2">
               <div className="flex gap-4 min-w-max">
@@ -140,15 +138,14 @@ export default function Main() {
           )}
         </div>
 
-        {/* Топ авторів - горизонтальний скрол без полоси */}
         <div className="sm:px-8 px-4">
-          <h2 className="text-[#ffc400] text-xl font-bold mb-4">Топ авторів</h2>
+          <h2 className="text-[#ffc400] text-xl font-bold mb-4">Top Authors</h2>
           
           {loadingAuthors ? (
-            <div className="text-white text-center py-10">Завантаження авторів...</div>
+            <div className="text-white text-center py-10">Loading authors...</div>
           ) : topAuthors.length === 0 ? (
             <div className="text-center py-10 text-gray-400">
-              Ще немає авторів
+              No authors yet
             </div>
           ) : (
             <div className="overflow-x-auto scrollbar-none sm:p-2 p-0">
@@ -175,12 +172,12 @@ export default function Main() {
         </div>
 
         <div className="sm:px-8 px-4 mt-4 mb-4">
-          <h2 className="text-[#ffc400] text-xl font-bold mb-4">Останні оновлення</h2>
+          <h2 className="text-[#ffc400] text-xl font-bold mb-4">Latest Updates</h2>
           
           {loadingChapters ? (
-            <div className="text-white text-center py-10">Завантаження глав...</div>
+            <div className="text-white text-center py-10">Loading chapters...</div>
           ) : latestChapters.length === 0 ? (
-            <div className="text-white text-center py-10">Ще немає глав</div>
+            <div className="text-white text-center py-10">No chapters yet</div>
           ) : (
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-3">
               {latestChapters.map((chapter) => (
@@ -202,7 +199,7 @@ export default function Main() {
                         {chapter.book_title}
                       </h3>
                       <p className="text-gray-400 text-sm mt-1">
-                        Розділ {chapter.chapter_number} - {chapter.title || "Без назви"}
+                        Chapter {chapter.chapter_number} - {chapter.title || "Without title"}
                       </p>
                     </div>
                     <div className="text-gray-500 text-xs flex-shrink-0">

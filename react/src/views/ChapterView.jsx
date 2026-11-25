@@ -7,6 +7,7 @@ import { useStateContext } from "../contexts/ContextProvider";
 import WindEffect from "../components/WindEffect";
 import Bottom from "./Bottom";
 import ReactMarkdown from 'react-markdown';
+import AudioReader from "../components/AudioReader";
 
 export default function ChapterView() {
   const { bookSlug, chapterNumber } = useParams();
@@ -119,7 +120,13 @@ ${'='.repeat(60)}
             >
               Назад до змісту
             </Link>
+            
             <div className="flex gap-2">
+              <AudioReader 
+                text={chapter.content_markdown} 
+                title={chapter.title || `Розділ ${chapter.chapter_number}`} 
+              />
+
               <button
                 onClick={downloadChapter}
                 className="bg-[#0c3200] text-[#ffc400] border border-[#ffc400] rounded-sm p-2 flex items-center gap-1 font-bold transition"
@@ -127,6 +134,7 @@ ${'='.repeat(60)}
                 Завантажити
               </button>
             </div>
+
             <div className="text-white text-sm">
               {book?.title}
             </div>

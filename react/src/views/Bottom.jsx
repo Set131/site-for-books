@@ -151,7 +151,7 @@ export default function Bottom() {
           )} 
           to={`/profile/${currentUser.id}`}
         >
-          Профіль
+          Profile
         </NavLink>
         
         <NavLink 
@@ -162,7 +162,7 @@ export default function Bottom() {
           )} 
           to={`/library/${currentUser.id}`}
         >
-          Бібліотека
+          Library
         </NavLink>
         
         <NavLink 
@@ -173,7 +173,7 @@ export default function Bottom() {
           )} 
           to={`/notifications/${currentUser.id}`}
         >
-          Повідомлення
+          Notifications
         </NavLink>
       </div>
     </div>

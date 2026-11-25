@@ -16,13 +16,13 @@ export default function ChaptersList({
   const canEditOrDelete = isAuthor || (currentUser && (currentUser.role === 'admin' || currentUser.role === 'moderator'));
 
   if (loadingChapters) {
-    return <div className="text-center py-10">Завантаження розділів...</div>;
+    return <div className="text-center py-10">Loading...</div>;
   }
 
   if (chapters.length === 0) {
     return (
       <div className="text-center py-10 text-gray-400">
-        {isAuthor ? "У цієї книги ще немає розділів. Додайте перший розділ!" : "У цієї книги ще немає розділів"}
+        {isAuthor ? "Without chapters. Do you want to add first?" : "Without chapters"}
       </div>
     );
   }
@@ -38,23 +38,22 @@ export default function ChaptersList({
             to={`/book/${bookSlug}/chapter/${chapter.chapter_number}`}
             className="flex-1"
           >
-            <span className="text-[#ffc400] sm:font-medium font-bold mr-3">Розділ {chapter.chapter_number}</span>
-            <span className="text-white">{chapter.title || `Розділ ${chapter.chapter_number}`}</span>
+            <span className="text-[#ffc400] sm:font-medium font-bold mr-3">Chapter {chapter.chapter_number}</span>
+            <span className="text-white">{chapter.title || `Chapter ${chapter.chapter_number}`}</span>
           </Link>
-          {/* Кнопки редагування/видалення - тепер і для модераторів/адмінів */}
           {canEditOrDelete && (
             <div className="flex gap-2 justify-between">
               <button
                 onClick={() => onEditChapter(chapter)}
                 className="text-blue-400 hover:text-blue-300 transition px-2"
               >
-                Редагувати
+                Edit
               </button>
               <button
                 onClick={() => onDeleteChapter(chapter.chapter_number)}
                 className="text-red-500 hover:text-red-400 transition px-2"
               >
-                Видалити
+                Delete
               </button>
             </div>
           )}

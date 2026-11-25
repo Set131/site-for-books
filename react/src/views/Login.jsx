@@ -38,7 +38,7 @@ export default function Login() {
     <>
       <div className="bg-[#0c3200]">
       <h2 className="mt-6 text-center text-3xl tracking-tight text-white">
-        Вхід
+        Sign in
       </h2>
 
       {error.__html && (
@@ -53,7 +53,7 @@ export default function Login() {
         <div>
           <div className="rounded-md text-white">
             <label htmlFor="email-address" className="text-sm">
-              Пошта
+              Email
             </label>
             <input
               id="email-address"
@@ -68,7 +68,7 @@ export default function Login() {
           </div>
           <div className="rounded-md text-white">
             <label htmlFor="password" className="text-sm">
-              Пароль
+              Password
             </label>
             <input
               id="password"
@@ -95,7 +95,7 @@ export default function Login() {
               htmlFor="remember-me"
               className="ml-2 block text-sm text-white"
             >
-              Запам'ятати мене
+              Remember me
             </label>
           </div>
         </div>
@@ -105,7 +105,7 @@ export default function Login() {
             type="submit"
             className="group relative flex w-full justify-center rounded-md border border-transparent bg-[#000000] py-2 px-4 text-sm font-medium text-white hover:text-[#ffc400] focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-2"
           >
-            Вхід
+            Sign in
           </button>
         </div>
 
@@ -114,7 +114,7 @@ export default function Login() {
             to="/signup"
             className="font-medium "
           >
-            Створити обліковий запис
+            Create an account
           </Link>
         </p>
       </form>
