@@ -33,7 +33,7 @@ export default function Contacts() {
     e.preventDefault();
     
     if (!formData.message.trim()) {
-      if (showToast) showToast("Введіть повідомлення", "error");
+      if (showToast) showToast("Please enter a message", "error");
       return;
     }
     
@@ -42,18 +42,18 @@ export default function Contacts() {
     
     try {
       await axiosClient.post('/contact', formData);
-      if (showToast) showToast("Повідомлення відправлено! Ми відповімо вам найближчим часом.", "success");
+      if (showToast) showToast("Message sent! We will respond shortly.", "success");
       setFormData({
         ...formData,
         message: ''
       });
     } catch (error) {
-      console.error("Помилка:", error);
+      console.error("Error:", error);
       if (error.response?.status === 422 && error.response?.data?.errors) {
         setErrors(error.response.data.errors);
-        if (showToast) showToast("Будь ласка, виправте помилки у формі", "error");
+        if (showToast) showToast("Please fix the errors in the form", "error");
       } else {
-        if (showToast) showToast("Не вдалося відправити повідомлення", "error");
+        if (showToast) showToast("Failed to send message", "error");
       }
     } finally {
       setSubmitting(false);
@@ -63,13 +63,13 @@ export default function Contacts() {
   return (
     <>
       <WindEffect />
-      <PageComponent title="Контакти">
+      <PageComponent title="Contacts">
         <div className="max-w-4xl mx-auto px-4 py-8 bg-black rounded-xl border border-gray-800">
-          <p className='text-4xl mb-8 flex justify-center text-white'>Контакти</p>
+          <p className='text-4xl mb-8 flex justify-center text-white'>Contacts</p>
           
           <div className='text-[#ffc400] sm:flex sm:justify-between block'>
             <div className='sm:w-[47%] bg-[#0c3200] border border-[#ffc400] rounded-xl p-5 w-[100%] mb-8'>
-              <p className="flex justify-center font-bold mb-4">Наші номери</p>
+              <p className="flex justify-center font-bold mb-4">Our numbers</p>
               <div className="flex justify-between">
                 <p>+380968583454</p>
                 <p>+380509231674</p>
@@ -77,13 +77,13 @@ export default function Contacts() {
             </div>
             <div className="w-[6%]"></div>
             <div className='sm:w-[47%] bg-[#0c3200] border border-[#ffc400] rounded-xl p-5 w-[100%] mb-8'>
-              <p className="flex justify-center font-bold mb-4">Наша пошта :</p>
+              <p className="flex justify-center font-bold mb-4">Our email:</p>
               <p className="flex justify-center">site_for_books@gmail.com</p>
             </div>
           </div>
 
           <div className='text-[#ffc400] bg-[#0c3200] border border-[#ffc400] rounded-xl py-5 px-15 w-[100%] mb-8'>
-            <p className="flex justify-center font-bold mb-4">Наші соціальні мережі</p>
+            <p className="flex justify-center font-bold mb-4">Our social networks</p>
             <div className="md:flex justify-center block">
               <div className="flex justify-between">
                 <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer" className="w-[150px] p-5">
@@ -105,15 +105,15 @@ export default function Contacts() {
           </div>
 
           <div className="bg-[#1a1a1a] rounded-xl p-6 border border-[#ffc400]">
-            <h2 className="text-xl font-bold text-[#ffc400] mb-4 text-center">Написати нам</h2>
+            <h2 className="text-xl font-bold text-[#ffc400] mb-4 text-center">Write to us</h2>
             <p className="text-gray-400 text-center mb-6">
-              Маєте питання або пропозиції? Напишіть нам, і ми відповімо найближчим часом!
+              Have questions or suggestions? Write to us and we will respond shortly!
             </p>
             
             <form onSubmit={handleSubmit} className="max-w-2xl mx-auto">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                 <div>
-                  <label className="block text-white text-sm mb-1">Ім'я *</label>
+                  <label className="block text-white text-sm mb-1">Name *</label>
                   <input
                     type="text"
                     name="name"
@@ -138,14 +138,14 @@ export default function Contacts() {
                 </div>
               </div>
               <div className="mb-4">
-                <label className="block text-white text-sm mb-1">Повідомлення *</label>
+                <label className="block text-white text-sm mb-1">Message *</label>
                 <textarea
                   name="message"
                   value={formData.message}
                   onChange={handleChange}
                   required
                   rows="5"
-                  placeholder="Опишіть ваше питання або проблему..."
+                  placeholder="Describe your question or issue..."
                   className={`w-full p-2 rounded-lg bg-[#2a2a2a] text-white border ${errors.message ? 'border-red-500' : 'border-gray-700'} focus:border-[#ffc400] outline-none resize-none`}
                 />
                 {errors.message && <p className="text-red-500 text-xs mt-1">{errors.message[0]}</p>}
@@ -159,7 +159,7 @@ export default function Contacts() {
                     : 'bg-[#ffc400] text-black hover:bg-[#e6b000]'
                 }`}
               >
-                {submitting ? "Відправлення..." : "Надіслати"}
+                {submitting ? "Sending..." : "Send"}
               </button>
             </form>
           </div>

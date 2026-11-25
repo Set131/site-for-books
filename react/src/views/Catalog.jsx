@@ -21,10 +21,10 @@ export default function Catalog() {
   const [isAgeFilterOpen, setIsAgeFilterOpen] = useState(false);
 
   const onDeleteClick = (id) => {
-    if (window.confirm("Ви впевнені, що хочете видалити цю книгу?")) {
+    if (window.confirm("Are you sure you want to delete this book?")) {
       axiosClient.delete(`/book/${id}`).then(() => {
         getBooks();
-        showToast("Книгу видалено");
+        showToast("Book deleted");
       });
     }
   };
@@ -58,7 +58,7 @@ export default function Catalog() {
   };
 
   const getAgeFilterText = () => {
-    if (selectedAgeLimit === "all") return "Всі віки";
+    if (selectedAgeLimit === "all") return "All ages";
     return `${selectedAgeLimit}+`;
   };
 
@@ -100,10 +100,10 @@ export default function Catalog() {
 
   const getFilterText = () => {
     switch(filter) {
-      case 'new': return 'Новинки';
-      case 'popular': return 'Популярні';
-      case 'rating': return 'За рейтингом';
-      default: return 'Новинки';
+      case 'new': return 'New';
+      case 'popular': return 'Popular';
+      case 'rating': return 'By rating';
+      default: return 'New';
     }
   };
 
@@ -113,30 +113,30 @@ export default function Catalog() {
     <>
       <WindEffect />
       <PageComponent
-        title="Каталог книг"
+        title="Book Catalog"
         buttons={<div></div>}
         search={{
           value: search,
           onChange: setSearch,
-          placeholder: "Пошук книг за назвою..."
+          placeholder: "Search books by title..."
         }}
       >
         <div className="hidden lg:flex gap-4">
-          {/* Бокова панель з фільтрами */}
+          {/* Sidebar with filters */}
           <div className="w-[20%] min-h-screen bg-black/50 rounded-lg p-4">
-            {/* Кнопка скидання всіх фільтрів - ЗВЕРХУ */}
+            {/* Reset all filters button - TOP */}
             {hasActiveFilters && (
               <button
                 onClick={resetAllFilters}
                 className="w-full text-sm text-red-500 hover:text-red-400 transition py-2 mb-4 border border-red-500 rounded-lg"
               >
-                ✕ Очистити всі фільтри
+                ✕ Clear all filters
               </button>
             )}
 
-            {/* Фільтр за віковим обмеженням - ПЕРШИЙ */}
+            {/* Age restriction filter - FIRST */}
             <h3 className="text-[#ffc400] font-bold text-xl mb-4 border-b border-[#ffc400] pb-2">
-              Вікове обмеження
+              Age restriction
             </h3>
             
             <div className="flex flex-col gap-2 mb-6">
@@ -150,14 +150,14 @@ export default function Catalog() {
                       : "bg-[#0c3200] text-white hover:bg-black/50"
                   }`}
                 >
-                  {age === "all" ? "Всі віки" : `${age}+`}
+                  {age === "all" ? "All ages" : `${age}+`}
                 </button>
               ))}
             </div>
 
-            {/* Фільтр за тегами - ДРУГИЙ */}
+            {/* Tag filter - SECOND */}
             <h3 className="text-[#ffc400] font-bold text-xl mb-4 border-b border-[#ffc400] pb-2">
-              Фільтр за тегами
+              Filter by tags
             </h3>
             
             <div className="flex flex-col gap-2">
@@ -191,9 +191,9 @@ export default function Catalog() {
                       }`}
                     >
                       <p className="mx-1">
-                        {type === "new" && "Новинки"}
-                        {type === "popular" && "Популярні"}
-                        {type === "rating" && "За рейтингом"}
+                        {type === "new" && "New"}
+                        {type === "popular" && "Popular"}
+                        {type === "rating" && "By rating"}
                       </p>
                     </button>
                   </div>
@@ -204,7 +204,7 @@ export default function Catalog() {
             <div className="sm:px-10 px-0">
               {books.length === 0 ? (
                 <div className="text-center font-bold text-[#ffc400] py-10">
-                  Жодних книг не знайдено
+                  No books found
                 </div>
               ) : (
                 <>
@@ -251,9 +251,9 @@ export default function Catalog() {
           </div>
         </div>
 
-        {/* Мобільна версія */}
+        {/* Mobile version */}
         <div className="lg:hidden block">
-          {/* Сортування */}
+          {/* Sorting */}
           <div className="px-4 mb-4">
             <details className="bg-black rounded-lg border border-[#ffc400]" open={isSortOpen}>
               <summary 
@@ -263,7 +263,7 @@ export default function Catalog() {
                   setIsSortOpen(!isSortOpen);
                 }}
               >
-                Сортування: {getFilterText()}
+                Sort: {getFilterText()}
               </summary>
               <div className="flex flex-col gap-2 border-t border-[#ffc400] p-3">
                 <button
@@ -274,7 +274,7 @@ export default function Catalog() {
                       : "bg-[#0c3200] text-white hover:bg-black/50"
                   }`}
                 >
-                  Новинки
+                  New
                 </button>
                 <button
                   onClick={() => handleFilterChange('popular')}
@@ -284,7 +284,7 @@ export default function Catalog() {
                       : "bg-[#0c3200] text-white hover:bg-black/50"
                   }`}
                 >
-                  Популярні
+                  Popular
                 </button>
                 <button
                   onClick={() => handleFilterChange('rating')}
@@ -294,25 +294,25 @@ export default function Catalog() {
                       : "bg-[#0c3200] text-white hover:bg-black/50"
                   }`}
                 >
-                  За рейтингом
+                  By rating
                 </button>
               </div>
             </details>
           </div>
 
-          {/* Кнопка скидання фільтрів для мобільної версії */}
+          {/* Reset filters button for mobile */}
           {hasActiveFilters && (
             <div className="px-4 mb-4">
               <button
                 onClick={resetAllFilters}
                 className="w-full text-sm text-red-500 hover:text-red-400 transition py-2 border border-red-500 rounded-lg bg-black"
               >
-                ✕ Очистити всі фільтри
+                ✕ Clear all filters
               </button>
             </div>
           )}
 
-          {/* Фільтр за віковим обмеженням - мобільна версія */}
+          {/* Age restriction filter - mobile */}
           <div className="px-4 mb-4">
             <details className="bg-black rounded-lg border border-[#ffc400]" open={isAgeFilterOpen}>
               <summary 
@@ -322,7 +322,7 @@ export default function Catalog() {
                   setIsAgeFilterOpen(!isAgeFilterOpen);
                 }}
               >
-                Вік: {getAgeFilterText()}
+                Age: {getAgeFilterText()}
               </summary>
               <div className="flex flex-col gap-2 border-t border-[#ffc400] p-3">
                 {["all", 0, 6, 12, 16, 18].map((age) => (
@@ -335,18 +335,18 @@ export default function Catalog() {
                         : "bg-[#0c3200] text-white hover:bg-black/50"
                     }`}
                   >
-                    {age === "all" ? "Всі віки" : `${age}+`}
+                    {age === "all" ? "All ages" : `${age}+`}
                   </button>
                 ))}
               </div>
             </details>
           </div>
 
-          {/* Фільтр за тегами */}
+          {/* Tag filter */}
           <div className="px-4 mb-4">
             <details className="bg-black rounded-lg border border-[#ffc400]">
               <summary className="text-[#ffc400] font-medium p-3 cursor-pointer">
-                Фільтр за тегами {selectedTags.length > 0 && `(${selectedTags.length})`}
+                Filter by tags {selectedTags.length > 0 && `(${selectedTags.length})`}
               </summary>
               <div className="p-3 flex flex-col gap-2 border-t border-[#ffc400] max-h-60 overflow-y-auto">
                 {ALL_TAGS.map((tag) => (
@@ -369,7 +369,7 @@ export default function Catalog() {
           <div className="px-4">
             {books.length === 0 ? (
               <div className="text-center font-bold text-[#ffc400] py-10">
-                Жодних книг не знайдено
+                No books found
               </div>
             ) : (
               <>

@@ -130,14 +130,14 @@ export default function BookInfo({ book, isAuthor, onDeleteBookClick, renderRati
               : "bg-black text-[#ffc400] border border-[#ffc400] hover:bg-[#1a1a1a]"
           }`}
         >
-          {isSavingLoading ? "Завантаження..." : (isSaved ? "✓ У бібліотеці" : "+ Додати в бібліотеку")}
+          {isSavingLoading ? "Loading..." : (isSaved ? "✓ In library" : "+ Add to library")}
         </button>
 
         <button
           onClick={openRatingModal}
           className="w-full mt-2 py-2 rounded-lg bg-black text-[#ffc400] font-bold hover:text-white transition border border-[#ffc400]"
         >
-          {userRating ? `Змінити оцінку (${userRating}/10)` : "Оцінити книгу"}
+          {userRating ? `Змінити оцінку (${userRating}/10)` : "Rate book"}
         </button>
 
         <div className="mt-4 space-y-2">
@@ -146,17 +146,17 @@ export default function BookInfo({ book, isAuthor, onDeleteBookClick, renderRati
             to={`/profile/${book.user_id}`}
             className="bg-black/50 rounded-lg p-3 block hover:bg-black/70 transition cursor-pointer"
           >
-            <p className="text-gray-400 text-sm">Автор</p>
+            <p className="text-gray-400 text-sm">Creator</p>
             <p className="text-white font-medium">{book.creator_name || "Невідомий"}</p>
           </Link>
           
           <div className="bg-black/50 rounded-lg p-3">
-            <p className="text-gray-400 text-sm">Рік створення</p>
+            <p className="text-gray-400 text-sm">Created</p>
             <p className="text-white font-medium">{getYear(book.created_at) || "Невідомо"}</p>
           </div>
 
           <div className="bg-black/50 rounded-lg p-3">
-            <p className="text-gray-400 text-sm">Кількість переглядів</p>
+            <p className="text-gray-400 text-sm">Views</p>
             <p className="text-white font-medium">{book.views || 0}</p>
           </div>
         </div>
@@ -168,13 +168,13 @@ export default function BookInfo({ book, isAuthor, onDeleteBookClick, renderRati
               to={`/books/${book.id}`}
               className="text-[#ffc400] my-2 p-2 flex justify-center bg-black border border-[#ffc400] rounded-xl font-medium"
             >
-              Редагувати книгу
+              Edit
             </Link>
             <button
               onClick={onDeleteBookClick}
               className="text-red-700 p-2 flex justify-center bg-black border border-red-700 rounded-xl w-full mt-2"
             >
-              Видалити книгу
+              Delete
             </button>
           </div>
         )}
@@ -183,7 +183,7 @@ export default function BookInfo({ book, isAuthor, onDeleteBookClick, renderRati
           to="/catalog"
           className="text-black p-2 justify-center bg-[#cc9d00] rounded-xl mt-5 hover:bg-[#ffc400] transition font-medium block text-center"
         >
-          Повернутись до каталогу
+          Back to catalog
         </Link>
       </div>
 
@@ -221,7 +221,7 @@ export default function BookInfo({ book, isAuthor, onDeleteBookClick, renderRati
             </div>
             
             <p className="text-center text-white text-lg mb-6">
-              {selectedRating > 0 ? `Ваша оцінка: ${selectedRating} / 10` : "Виберіть оцінку"}
+              {selectedRating > 0 ? `Your rating: ${selectedRating} / 10` : "Choose"}
             </p>
             
             <div className="flex gap-3">

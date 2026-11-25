@@ -17,7 +17,7 @@ export default function ChapterForm({
       <div className="bg-[#1a1a1a] rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto relative">
         <div className="sticky top-0 bg-[#1a1a1a] p-4 border-b border-[#ffc400] flex justify-between items-center">
           <h2 className="text-xl font-bold text-[#ffc400]">
-            {editingChapter ? "Редагувати розділ" : "Новий розділ"}
+            {editingChapter ? "Edit chapter" : "New chapter"}
           </h2>
           <button
             onClick={onClose}
@@ -29,7 +29,7 @@ export default function ChapterForm({
         
         <form onSubmit={onSave} className="p-6">
           <div className="mb-4">
-            <label className="block text-white mb-2">Номер розділу</label>
+            <label className="block text-white mb-2">Number of chapter</label>
             <input
               type="number"
               value={chapterForm.chapter_number}
@@ -41,19 +41,19 @@ export default function ChapterForm({
           </div>
           
           <div className="mb-4">
-            <label className="block text-white mb-2">Назва розділу (необов'язково)</label>
+            <label className="block text-white mb-2">Name of chapter</label>
             <input
               type="text"
               value={chapterForm.title}
               onChange={(e) => setChapterForm({ ...chapterForm, title: e.target.value })}
               className="w-full p-2 rounded-lg bg-[#2a2a2a] text-white border border-[#ffc400]"
-              placeholder="Назва розділу"
+              placeholder="Name of chapter"
             />
           </div>
           
           <div className="mb-4">
             <div className="flex justify-between items-center mb-2">
-              <label className="block text-white">Текст розділу (Markdown)</label>
+              <label className="block text-white">Text (Markdown)</label>
               <button
                 type="button"
                 onClick={() => setPreviewMode(!previewMode)}
@@ -65,7 +65,7 @@ export default function ChapterForm({
             
             {previewMode ? (
               <div className="p-4 rounded-lg bg-[#2a2a2a] border border-[#ffc400] min-h-[300px] prose prose-invert max-w-none">
-                <ReactMarkdown>{chapterForm.content_markdown || "*Немає тексту*"}</ReactMarkdown>
+                <ReactMarkdown>{chapterForm.content_markdown || "*No text*"}</ReactMarkdown>
               </div>
             ) : (
               <textarea

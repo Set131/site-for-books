@@ -9,10 +9,10 @@ import { useEffect } from "react";
 import Avatar from '../components/Avatar'; 
 
 const navigation = [
-  { name: 'Головна', to: '/'},
-  { name: 'Каталог', to: '/catalog'},
-  { name: 'Про сайт', to: '/about'},
-  { name: 'Контакти', to: '/contacts'}
+  { name: 'Main', to: '/'},
+  { name: 'Catalog', to: '/catalog'},
+  { name: 'About us', to: '/about'},
+  { name: 'Contacts', to: '/contacts'}
 ]
 
 function classNames(...classes) {
@@ -64,7 +64,7 @@ export default function DefaultLayout() {
   // Створюємо окремий масив для десктопу та мобільного меню
   const desktopNavigation = [...navigation];
   if (isAdminOrModerator) {
-    desktopNavigation.push({ name: 'Адмін-панель', to: '/admin/contacts' });
+    desktopNavigation.push({ name: 'Admin-panel', to: '/admin/contacts' });
   }
 
   // Для мобільного меню - окремий масив (без адмін-панелі в сітці, вона буде окремо)
@@ -128,13 +128,13 @@ export default function DefaultLayout() {
                         <div className="absolute right-0 w-50 bg-black text-white rounded-b-lg shadow-lg px-8 z-50 mt-13 py-5 menu-dropdown">
                           <ul className="space-y-3 font-medium text-center">
                             <li>
-                              <Link className="hover:text-[#ffc400] block" to={`/profile/${currentUser.id}`}>Профіль</Link>
+                              <Link className="hover:text-[#ffc400] block" to={`/profile/${currentUser.id}`}>Profile</Link>
                             </li>
                             <li>
-                              <Link className="hover:text-[#ffc400] block" to={`/library/${currentUser.id}`}>Бібліотека</Link>
+                              <Link className="hover:text-[#ffc400] block" to={`/library/${currentUser.id}`}>Library</Link>
                             </li>
                             <li>
-                              <Link className="hover:text-[#ffc400] block" to={`/notifications/${currentUser.id}`}>Повідомлення</Link>
+                              <Link className="hover:text-[#ffc400] block" to={`/notifications/${currentUser.id}`}>Notifications</Link>
                             </li>
                           </ul>
                         </div>
@@ -147,7 +147,7 @@ export default function DefaultLayout() {
               <div className="-mr-2 flex md:hidden">
                 <DisclosureButton className="group relative">
                   <span className="absolute -inset-0.5" />
-                  <span className="sr-only">Меню</span>
+                  <span className="sr-only">Menu</span>
                   <img src={menu} alt="." className='w-50% m-auto w-8 mr-[5%]'/>
                 </DisclosureButton>
               </div>
@@ -155,7 +155,6 @@ export default function DefaultLayout() {
           </div>
           
           <DisclosurePanel className="md:hidden">
-            {/* Звичайна сітка 2x2 для навігації (без адмін-панелі) */}
             <div className="grid grid-cols-2 gap-2 px-2 pt-2 pb-3 sm:px-3">
               {mobileNavigation.map((item) => (
                 <NavLink
@@ -180,7 +179,7 @@ export default function DefaultLayout() {
                     'rounded-md px-3 py-2 text-sm font-medium text-white transition-all duration-400 text-center block'
                   )}
                 >
-                  Адмін-панель
+                  Admin-panel
                 </NavLink>
               </div>
             )}

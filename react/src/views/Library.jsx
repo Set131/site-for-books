@@ -60,7 +60,7 @@ export default function Library() {
     return (
       <>
         <WindEffect />
-        <PageComponent title="Персональна бібліотека" buttons="">
+        <PageComponent title="Library" buttons="">
           <div className="text-center py-20 text-white">
             Увійдіть в систему, щоб побачити свою бібліотеку
           </div>
@@ -73,11 +73,11 @@ export default function Library() {
   return (
     <>
       <WindEffect />
-      <PageComponent title="Персональна бібліотека" buttons="">
-        <h1 className="sm:text-2xl text-xl font-bold text-white sm:mx-10 mx-0 sm:text-left text-center mb-6">Персональна бібліотека</h1>
+      <PageComponent title="Library" buttons="">
+        <h1 className="sm:text-2xl text-xl font-bold text-white sm:mx-10 mx-0 sm:text-left text-center mb-6">Library</h1>
         <div className="px-4 sm:px-10">
           {loading ? (
-            <div className="text-center py-20 text-white">Завантаження...</div>
+            <div className="text-center py-20 text-white">Loading...</div>
           ) : savedBooks.length === 0 ? (
             <div className="text-center py-20 text-[#ffc400]">
               Ваша бібліотека порожня

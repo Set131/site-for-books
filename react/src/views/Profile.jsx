@@ -53,8 +53,8 @@ export default function Profile() {
           setFriendStatus(statusResponse.data.status);
         }
       } catch (error) {
-        console.error("Помилка завантаження даних:", error);
-        setApiError("Помилка завантаження даних профілю");
+        console.error("Error loading data:", error);
+        setApiError("Error loading profile data");
       }
     };
 
@@ -69,7 +69,7 @@ export default function Profile() {
       });
       setUserBooks(data.data);
     } catch (error) {
-      console.error("Помилка завантаження книг:", error);
+      console.error("Error loading books:", error);
     } finally {
       setLoadingBooks(false);
     }
@@ -89,7 +89,7 @@ export default function Profile() {
         setFriendStatus('none');
       }
     } catch (error) {
-      console.error("Помилка:", error);
+      console.error("Error:", error);
     } finally {
       setFriendLoading(false);
     }
@@ -97,22 +97,22 @@ export default function Profile() {
 
   const getFriendButtonText = () => {
     switch (friendStatus) {
-      case 'none': return 'Додати в друзі';
-      case 'sent': return 'Запит надіслано';
-      case 'received': return 'Прийняти запит';
-      case 'friend': return 'В друзях';
-      default: return 'Додати в друзі';
+      case 'none': return 'Add friend';
+      case 'sent': return 'Request sent';
+      case 'received': return 'Accept request';
+      case 'friend': return 'In friends';
+      default: return 'Add friend';
     }
   };
 
   const formatPhoneForDisplay = (phone) => {
-    if (!phone) return "Не вказано";
+    if (!phone) return "Not specified";
     return `${phone.slice(0, 3)} (${phone.slice(3, 6)}) ${phone.slice(6, 9)}-${phone.slice(9, 11)}-${phone.slice(11)}`;
   };
 
   const handleSave = () => {
     if (phoneInput.length !== 9 || !/^\d+$/.test(phoneInput)) {
-      setPhoneError("Введіть коректний номер (9 цифр без коду країни)");
+      setPhoneError("Enter a valid number (9 digits without country code)");
       return;
     }
 
@@ -131,11 +131,11 @@ export default function Profile() {
       })
       .catch((err) => {
         console.error(err);
-        setApiError("Помилка при оновленні профілю");
+        setApiError("Error updating profile");
       });
   };
 
-  // Функція для вибору фото - одразу відкриває діалог вибору файлу
+  // Function for selecting photo - immediately opens file selection dialog
   const handleAvatarClick = () => {
     if (isOwnProfile && fileInputRef.current) {
       fileInputRef.current.click();
@@ -149,7 +149,7 @@ export default function Profile() {
       reader.onload = () => {
         setAvatarPreview(reader.result);
         setAvatarFile(file);
-        // Відразу зберігаємо фото після вибору
+        // Immediately save photo after selection
         saveAvatar(reader.result);
       };
       reader.readAsDataURL(file);
@@ -172,8 +172,8 @@ export default function Profile() {
         setCurrentUser(data);
       }
     } catch (err) {
-      console.error("Помилка завантаження аватара:", err);
-      setApiError("Не вдалося завантажити фото");
+      console.error("Error uploading avatar:", err);
+      setApiError("Failed to upload photo");
     } finally {
       setUploadingAvatar(false);
     }
@@ -191,7 +191,7 @@ export default function Profile() {
     );
   };
 
-  // Отримуємо першу літеру імені
+  // Get the first letter of the name
   const getFirstLetter = () => {
     if (!user?.name) return "?";
     return user.name.charAt(0).toUpperCase();
@@ -200,9 +200,9 @@ export default function Profile() {
   return (
     <>
       <WindEffect />
-      <PageComponent title={user ? `Профіль: ${user.name}` : "Профіль"}>
+      <PageComponent title={user ? `Profile: ${user.name}` : "Profile"}>
         <div className="max-w-6xl mx-auto px-4 py-8">
-          {/* Прихований input для вибору файлу */}
+          {/* Hidden input for file selection */}
           <input
             type="file"
             ref={fileInputRef}
@@ -226,7 +226,7 @@ export default function Profile() {
               <div className="w-full p-6 md:p-8">
                 <div className="flex flex-col md:flex-row md:items-start gap-6 md:gap-8">
                   
-                  {/* Фото - при натисканні відкривається вибір файлу */}
+                  {/* Photo - clicking opens file selection */}
                   <div className="flex flex-col items-center md:items-start flex-shrink-0">
                     <div 
                       className="relative group cursor-pointer"
@@ -251,7 +251,7 @@ export default function Profile() {
                       {isOwnProfile && (
                         <div className="absolute inset-0 rounded-full bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
                           <span className="text-white text-sm font-medium bg-black/70 px-3 py-1 rounded-full">
-                            Змінити фото
+                            Change photo
                           </span>
                         </div>
                       )}
@@ -259,14 +259,14 @@ export default function Profile() {
                     
                     {uploadingAvatar && (
                       <div className="mt-2 text-center">
-                        <p className="text-[#ffc400] text-sm">Збереження...</p>
+                        <p className="text-[#ffc400] text-sm">Saving...</p>
                       </div>
                     )}
                   </div>
 
-                  {/* Інформація про користувача */}
+                  {/* User information */}
                   <div className="flex-1">
-                    <h1 className="text-3xl font-bold mb-2">{user?.name || "Завантаження..."}</h1>
+                    <h1 className="text-3xl font-bold mb-2">{user?.name || "Loading..."}</h1>
                     
                     {!isOwnProfile && currentUser && (
                       <button
@@ -287,10 +287,10 @@ export default function Profile() {
                     )}
                     
                     <div className="space-y-2 mt-2">
-                      <p><strong>Email:</strong> {user?.email || "Завантаження..."}</p>
-                      <p><strong>Дата створення:</strong> {user?.created_at || "Завантаження..."}</p>
+                      <p><strong>Email:</strong> {user?.email || "Loading..."}</p>
+                      <p><strong>Created at:</strong> {user?.created_at || "Loading..."}</p>
                       <div className="flex flex-wrap items-center gap-2">
-                        <strong>Телефон:</strong>
+                        <strong>Phone:</strong>
                         {editMode ? (
                           <div className="flex flex-wrap items-center gap-2">
                             <span className="text-[#ffc400]">+380</span>
@@ -312,7 +312,7 @@ export default function Profile() {
                               onClick={handleSave}
                               className="bg-green-600 text-white px-3 py-1 rounded text-sm"
                             >
-                              Зберегти
+                              Save
                             </button>
                             <button
                               onClick={() => {
@@ -322,18 +322,18 @@ export default function Profile() {
                               }}
                               className="bg-gray-600 text-white px-3 py-1 rounded text-sm"
                             >
-                              Скасувати
+                              Cancel
                             </button>
                           </div>
                         ) : (
                           <div className="flex items-center gap-2 flex-wrap">
-                            <span>{user?.phone ? formatPhoneForDisplay(user.phone) : "Не вказано"}</span>
+                            <span>{user?.phone ? formatPhoneForDisplay(user.phone) : "Not specified"}</span>
                             {isOwnProfile && (
                               <button
                                 onClick={() => setEditMode(true)}
                                 className="text-sm bg-[#ffc400] text-black hover:bg-[#e6b000] px-3 py-1 rounded font-bold"
                               >
-                                {user?.phone ? "Змінити" : "Додати"}
+                                {user?.phone ? "Change" : "Add"}
                               </button>
                             )}
                           </div>
@@ -353,11 +353,11 @@ export default function Profile() {
                     <div className="flex justify-between h-35 sm:w-2/3 w-full">
                       <Link className="hover:shadow-[#ffc400] hover:shadow-lg m-auto w-full h-full flex 
                         justify-center bg-black border-1 border-[#ffc400] hover:opacity-70" to={`/own_books/${user?.id}`}>
-                        <h2 className="m-auto text-2xl">Власні книги</h2>
+                        <h2 className="m-auto text-2xl">Own books</h2>
                       </Link>
                       <Link className="hover:shadow-[#ffc400] hover:shadow-lg m-auto w-full h-full flex 
                         justify-center bg-black border-1 border-[#ffc400] hover:opacity-70" to={`/friends/${user?.id}`}>
-                        <h2 className="m-auto text-2xl">Друзі</h2>
+                        <h2 className="m-auto text-2xl">Friends</h2>
                       </Link>
                     </div>
                     <button
@@ -365,7 +365,7 @@ export default function Profile() {
                       className="hover:shadow-[#ffc400] hover:shadow-lg m-auto sm:w-1/3 w-full sm:h-full flex 
                       justify-center bg-[#440000] border-1 border-[#ffc400] hover:opacity-70 h-35"
                     >
-                      <h2 className="m-auto text-2xl">Вийти</h2>
+                      <h2 className="m-auto text-2xl">Logout</h2>
                     </button>
                   </div>
                 </div>
@@ -376,14 +376,14 @@ export default function Profile() {
           {!isOwnProfile && (
             <div className="mt-8">
               <h2 className="text-2xl font-bold text-[#ffc400] mb-4">
-                Книги користувача
+                User's books
               </h2>
               
               {loadingBooks ? (
-                <div className="text-center py-10 text-white">Завантаження книг...</div>
+                <div className="text-center py-10 text-white">Loading books...</div>
               ) : userBooks.length === 0 ? (
                 <div className="text-center py-10 text-gray-400">
-                  У користувача ще немає книг
+                  User doesn't have any books yet
                 </div>
               ) : (
                 <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">

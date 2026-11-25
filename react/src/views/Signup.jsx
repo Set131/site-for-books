@@ -40,7 +40,7 @@ export default function Signup() {
     <>
       <div className="bg-[#0c3200]">
         <h2 className="text-center text-3xl tracking-tight text-white">
-          Реєстрація
+          Registration
         </h2>
 
         {error.__html && (
@@ -55,7 +55,7 @@ export default function Signup() {
           <div>
             <div className="rounded-md text-white">
               <label htmlFor="full-name" className="text-sm">
-                Нік
+                Username
               </label>
               <input
                 id="full-name"
@@ -69,7 +69,7 @@ export default function Signup() {
             </div>
             <div className="rounded-md text-white">
               <label htmlFor="email-address" className="text-sm">
-                Пошта
+                Email
               </label>
               <input
                 id="email-address"
@@ -84,7 +84,7 @@ export default function Signup() {
             </div>
             <div className="rounded-md text-white">
               <label htmlFor="password" className="text-sm">
-                Пароль
+                Password
               </label>
               <input
                 id="password"
@@ -99,7 +99,7 @@ export default function Signup() {
             </div>
             <div className="rounded-md text-white">
               <label htmlFor="password-confirmation" className="text-sm">
-                Пароль (повторити)
+                Password (confirm)
               </label>
               <input
                 id="password-confirmation"
@@ -118,7 +118,7 @@ export default function Signup() {
               type="submit"
               className="group relative flex w-full justify-center rounded-md border border-transparent bg-[#000000] py-2 px-4 text-sm font-medium text-white hover:text-[#ffc400] focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-2"
             >
-              Зареєструватися
+              Sign up
             </button>
           </div>
 
@@ -127,7 +127,7 @@ export default function Signup() {
               to="/login"
               className="font-medium"
             >
-              Увійти через існуючий акаунт
+              Sign in with existing account
             </Link>
           </p>
         </form>

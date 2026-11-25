@@ -20,7 +20,8 @@
     "react-dom": "^19.0.0",
     "react-markdown": "^10.1.0",
     "react-responsive": "^10.0.1",
-    "react-router-dom": "^7.4.0"
+    "react-router-dom": "^7.4.0",
+    "remove-markdown": "^0.8.1"
   },
   "devDependencies": {
     "@eslint/js": "^9.21.0",
